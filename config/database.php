@@ -2,8 +2,8 @@
 // deklarasi parameter koneksi database
 $server   = "localhost";
 $username = "root";
-$password = "";
-$database = "db_sport";
+$password = "mysql";
+$database = "db_penjualan";
 
 // koneksi database
 $mysqli = new mysqli($server, $username, $password, $database);
