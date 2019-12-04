@@ -1,31 +1,13 @@
 <ul class="nav nav-list"> 
-<?php if ($_SESSION['level'] == 'pemilik'){?>
+<?php
+ include "../config/helper.php";
+ if ($_SESSION['level'] == 'pemilik'){
+?>
 <?php 
 // fungsi untuk pengecekan menu aktif
 // jika menu beranda dipilih, menu beranda aktif
-if ($_GET["module"] == "beranda") { ?>
-    <li class="active open hover highlight">
-        <a href="?module=beranda">
-            <i class="menu-icon fa fa-home"></i>
-            <span class="menu-text"> Beranda </span>
-        </a>
+buatMenu('beranda', 'Beranda', 'menu-icon fa fa-home');
 
-        <b class="arrow"></b>
-    </li>
-<?php
-} 
-// jika tidak, menu beranda tidak aktif
-else {  ?>
-     <li class="hover">
-        <a href="?module=beranda">
-            <i class="menu-icon fa fa-home"></i>
-            <span class="menu-text"> Beranda </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-<?php
-}
 
 // jika menu tentang dipilih, menu tentang aktif
 if ($_GET["module"] == "tentang") { ?>
@@ -778,31 +760,9 @@ else {  ?>
 }else{
 ?>
 <?php 
-// fungsi untuk pengecekan menu aktif
+// fungsi untuk pengecekan menu aktif Adminku
 // jika menu beranda dipilih, menu beranda aktif
-if ($_GET["module"] == "beranda") { ?>
-    <li class="active open hover highlight">
-        <a href="?module=beranda">
-            <i class="menu-icon fa fa-home"></i>
-            <span class="menu-text"> Beranda </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-<?php
-} 
-// jika tidak, menu beranda tidak aktif
-else {  ?>
-     <li class="hover">
-        <a href="?module=beranda">
-            <i class="menu-icon fa fa-home"></i>
-            <span class="menu-text"> Beranda </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-<?php
-}
+buatMenu('beranda', 'Beranda', 'menu-icon fa fa-home');
 
 // jika menu tentang dipilih, menu tentang aktif
 if ($_GET["module"] == "tentang") { ?>
@@ -870,23 +830,9 @@ elseif ($_GET["module"] == "kategori" || $_GET["module"] == "form_kategori") { ?
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="hover">
-                <a href="?module=barang">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Data Barang
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="active open hover">
-                <a href="?module=kategori">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Kategori Barang
-                </a>
-
-                <b class="arrow"></b>
-            </li>
+        <?php buatMenu('barang', ' Data Barang', 'fa fa-caret-right');  ?>
+          
+          <?php buatMenu('kategori', ' Kategori Barang', 'fa fa-caret-right');  ?>
         </ul>
     </li>
 <?php
@@ -904,52 +850,17 @@ else {  ?>
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="hover">
-                <a href="?module=barang">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Data Barang
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="hover">
-                <a href="?module=kategori">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Kategori Barang
-                </a>
-
-                <b class="arrow"></b>
-            </li>
+        <?php buatMenu('barang', ' Data Barang', 'fa fa-caret-right');  ?>
+          
+        <?php buatMenu('kategori', ' Kategori Barang', 'fa fa-caret-right');  ?>
         </ul>
     </li>
 <?php
 }
 
-// jika menu biaya kirim dipilih, menu biaya kirim aktif
-if ($_GET["module"] == "biaya_kirim") { ?>
-    <li class="active open hover highlight">
-        <a href="?module=biaya_kirim">
-            <i class="menu-icon fa fa-truck"></i>
-            <span class="menu-text"> Biaya Pengiriman </span>
-        </a>
+buatMenu('biaya_kirim', 'Biaya Pengiriman', 'menu-icon fa fa-truck');
 
-        <b class="arrow"></b>
-    </li>
-<?php
-} 
-// jika tidak, menu biaya kirim tidak aktif
-else {  ?>
-     <li class="hover">
-        <a href="?module=biaya_kirim">
-            <i class="menu-icon fa fa-truck"></i>
-            <span class="menu-text"> Biaya Pengiriman </span>
-        </a>
 
-        <b class="arrow"></b>
-    </li>
-<?php
-}
 
 // jika menu pesanan dipilih, menu pesanan aktif
 if ($_GET["module"] == "pesanan" || $_GET["module"] == "form_pesanan") { ?>
@@ -964,23 +875,11 @@ if ($_GET["module"] == "pesanan" || $_GET["module"] == "form_pesanan") { ?>
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="active open hover">
-                <a href="?module=pesanan">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Pesanan
-                </a>
 
-                <b class="arrow"></b>
-            </li>
 
-            <li class="hover">
-                <a href="?module=konfirmasi">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Konfirmasi Pembayaran
-                </a>
-
-                <b class="arrow"></b>
-            </li>
+        <?php buatMenu('pesanan', ' Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi_pesanan', ' Konfirmasi Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi', ' Konfirmasi Pembayaran', 'fa fa-caret-right');  ?>
         </ul>
     </li>
 <?php
@@ -998,23 +897,9 @@ elseif ($_GET["module"] == "konfirmasi" || $_GET["module"] == "form_konfirmasi")
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="hover">
-                <a href="?module=pesanan">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Pesanan
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="active open hover">
-                <a href="?module=konfirmasi">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Konfirmasi Pembayaran
-                </a>
-
-                <b class="arrow"></b>
-            </li>
+        <?php buatMenu('pesanan', ' Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi_pesanan', ' Konfirmasi Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi', ' Konfirmasi Pembayaran', 'fa fa-caret-right');  ?>
         </ul>
     </li>
 <?php
@@ -1032,52 +917,17 @@ else {  ?>
         <b class="arrow"></b>
 
         <ul class="submenu">
-            <li class="hover">
-                <a href="?module=pesanan">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Pesanan
-                </a>
-
-                <b class="arrow"></b>
-            </li>
-
-            <li class="hover">
-                <a href="?module=konfirmasi">
-                    <i class="menu-icon fa fa-caret-right"></i>
-                    Konfirmasi Pembayaran
-                </a>
-
-                <b class="arrow"></b>
-            </li>
+        <?php buatMenu('pesanan', ' Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi_pesanan', ' Konfirmasi Pesanan', 'fa fa-caret-right');  ?>
+        <?php buatMenu('konfirmasi', ' Konfirmasi Pembayaran', 'fa fa-caret-right');  ?>
         </ul>
     </li>
 <?php
 }
 
+buatMenu('komentar', 'Komentar', 'menu-icon fa fa-comment');
 // jika menu komentar dipilih, menu komentar aktif
-if ($_GET["module"] == "komentar") { ?>
-    <li class="active open hover highlight">
-        <a href="?module=komentar">
-            <i class="menu-icon fa fa-comment"></i>
-            <span class="menu-text"> Komentar </span>
-        </a>
 
-        <b class="arrow"></b>
-    </li>
-<?php
-} 
-// jika tidak, menu komentar tidak aktif
-else {  ?>
-     <li class="hover">
-        <a href="?module=komentar">
-            <i class="menu-icon fa fa-comment"></i>
-            <span class="menu-text"> Komentar </span>
-        </a>
-
-        <b class="arrow"></b>
-    </li>
-<?php
-}
 
 // jika menu Laporan perhari dipilih, menu Laporan perhari aktif
 if ($_GET["module"] == "laporanperhari") { ?>
@@ -1160,38 +1010,17 @@ elseif ($_GET["module"] == "grafik") { ?>
 <?php
 
 
-
-
 // jika menu password dipilih, menu password aktif
-if ($_GET["module"] == "password") { ?>
-    <li class="active open hover highlight">
-        <a href="?module=password">
-            <i class="menu-icon fa fa-lock"></i>
-            <span class="menu-text"> Ubah Password </span>
-        </a>
+buatMenu('password', 'Ubah Password', 'menu-icon fa fa-lock');
 
-        <b class="arrow"></b>
-    </li>
-<?php
-} 
-// jika tidak, menu password tidak aktif
-else {  ?>
-     <li class="hover">
-        <a href="?module=password">
-            <i class="menu-icon fa fa-lock"></i>
-            <span class="menu-text"> Ubah Password </span>
-        </a>
 
-        <b class="arrow"></b>
-    </li>
-	<?php
-	}
-	}
+
+    }
 	?>
 	
 	
 	
-	
+
     <li class="hover">
         <a data-toggle="modal" href="#logout">
             <i class="menu-icon fa fa-power-off"></i>
