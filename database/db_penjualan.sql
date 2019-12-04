@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
+-- version 4.4.15.9
+-- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2018 at 02:42 PM
--- Server version: 5.6.21
--- PHP Version: 5.5.19
+-- Generation Time: Dec 04, 2019 at 07:33 AM
+-- Server version: 5.6.37
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,10 +14,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_sport`
+-- Database: `db_penjualan`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_admin` (
-`id_admin` int(11) NOT NULL,
+  `id_admin` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `nama_admin` varchar(30) NOT NULL,
@@ -45,11 +45,25 @@ INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`, `nama_admin`, `leve
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_angsuran`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_angsuran` (
+  `id_angsuran` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `cicilan_ke` int(11) NOT NULL,
+  `batas_bayar` date NOT NULL,
+  `jumlah_bayar` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_barang`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_barang` (
-`id_barang` int(11) NOT NULL,
+  `id_barang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `tanggal_masuk` date NOT NULL,
   `nama_barang` varchar(50) NOT NULL,
@@ -82,7 +96,7 @@ INSERT INTO `tbl_barang` (`id_barang`, `id_kategori`, `tanggal_masuk`, `nama_bar
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_biaya_kirim` (
-`id_biaya` int(11) NOT NULL,
+  `id_biaya` int(11) NOT NULL,
   `provinsi` int(4) NOT NULL,
   `kabkota` int(2) NOT NULL,
   `biaya` int(11) NOT NULL
@@ -104,7 +118,7 @@ INSERT INTO `tbl_biaya_kirim` (`id_biaya`, `provinsi`, `kabkota`, `biaya`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_informasi` (
-`id_informasi` int(11) NOT NULL,
+  `id_informasi` int(11) NOT NULL,
   `judul` varchar(50) NOT NULL,
   `keterangan` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
@@ -616,7 +630,7 @@ INSERT INTO `tbl_kabkota` (`id_kabkota`, `nama_kabkota`, `id_provinsi`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_kategori` (
-`id_kategori` int(11) NOT NULL,
+  `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(30) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
@@ -638,7 +652,7 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_komentar` (
-`id_komentar` int(11) NOT NULL,
+  `id_komentar` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_konsumen` int(11) NOT NULL,
@@ -664,7 +678,7 @@ INSERT INTO `tbl_komentar` (`id_komentar`, `id_barang`, `tanggal`, `id_konsumen`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_konsumen` (
-`id_konsumen` int(11) NOT NULL,
+  `id_konsumen` int(11) NOT NULL,
   `tanggal_daftar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nama_konsumen` varchar(30) NOT NULL,
   `alamat` varchar(100) NOT NULL,
@@ -692,7 +706,7 @@ INSERT INTO `tbl_konsumen` (`id_konsumen`, `tanggal_daftar`, `nama_konsumen`, `a
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_pembayaran` (
-`id_bayar` int(11) NOT NULL,
+  `id_bayar` int(11) NOT NULL,
   `tanggal_bayar` date NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `rekening_asal` varchar(20) NOT NULL,
@@ -714,11 +728,25 @@ INSERT INTO `tbl_pembayaran` (`id_bayar`, `tanggal_bayar`, `id_transaksi`, `reke
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_pembayaran_angsuran`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_pembayaran_angsuran` (
+  `id_pembayaran` int(11) NOT NULL,
+  `id_angsuran` int(11) NOT NULL,
+  `tgl_bayar` date NOT NULL,
+  `jumlah_bayar_angsuran` int(11) NOT NULL,
+  `status_pembayaran` enum('Dikonfirmasi','Belum Dikonfirmasi','Ditolak','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_provinsi`
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_provinsi` (
-`id_provinsi` int(2) NOT NULL,
+  `id_provinsi` int(2) NOT NULL,
   `nama_provinsi` varchar(40) NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
@@ -790,7 +818,7 @@ INSERT INTO `tbl_transaksi` (`id_transaksi`, `tanggal_transaksi`, `id_konsumen`,
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_transaksi_detail` (
-`id_detail` int(11) NOT NULL,
+  `id_detail` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
@@ -825,73 +853,98 @@ CREATE TABLE IF NOT EXISTS `tbl_transaksi_tmp` (
 -- Indexes for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
- ADD PRIMARY KEY (`id_admin`);
+  ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indexes for table `tbl_angsuran`
+--
+ALTER TABLE `tbl_angsuran`
+  ADD PRIMARY KEY (`id_angsuran`);
 
 --
 -- Indexes for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
- ADD PRIMARY KEY (`id_barang`);
+  ADD PRIMARY KEY (`id_barang`);
 
 --
 -- Indexes for table `tbl_biaya_kirim`
 --
 ALTER TABLE `tbl_biaya_kirim`
- ADD PRIMARY KEY (`id_biaya`), ADD KEY `provinsi` (`provinsi`,`kabkota`);
+  ADD PRIMARY KEY (`id_biaya`),
+  ADD KEY `provinsi` (`provinsi`,`kabkota`);
 
 --
 -- Indexes for table `tbl_informasi`
 --
 ALTER TABLE `tbl_informasi`
- ADD PRIMARY KEY (`id_informasi`);
+  ADD PRIMARY KEY (`id_informasi`);
 
 --
 -- Indexes for table `tbl_kabkota`
 --
 ALTER TABLE `tbl_kabkota`
- ADD PRIMARY KEY (`id_kabkota`), ADD KEY `id_provinsi` (`id_provinsi`);
+  ADD PRIMARY KEY (`id_kabkota`),
+  ADD KEY `id_provinsi` (`id_provinsi`);
 
 --
 -- Indexes for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
- ADD PRIMARY KEY (`id_kategori`);
+  ADD PRIMARY KEY (`id_kategori`);
 
 --
 -- Indexes for table `tbl_komentar`
 --
 ALTER TABLE `tbl_komentar`
- ADD PRIMARY KEY (`id_komentar`), ADD KEY `id_warta` (`id_barang`), ADD KEY `id_barang` (`id_barang`), ADD KEY `id_konsumen` (`id_konsumen`), ADD KEY `id_konsumen_2` (`id_konsumen`);
+  ADD PRIMARY KEY (`id_komentar`),
+  ADD KEY `id_warta` (`id_barang`),
+  ADD KEY `id_barang` (`id_barang`),
+  ADD KEY `id_konsumen` (`id_konsumen`),
+  ADD KEY `id_konsumen_2` (`id_konsumen`);
 
 --
 -- Indexes for table `tbl_konsumen`
 --
 ALTER TABLE `tbl_konsumen`
- ADD PRIMARY KEY (`id_konsumen`), ADD KEY `kota` (`kota`), ADD KEY `provinsi` (`provinsi`);
+  ADD PRIMARY KEY (`id_konsumen`),
+  ADD KEY `kota` (`kota`),
+  ADD KEY `provinsi` (`provinsi`);
 
 --
 -- Indexes for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
- ADD PRIMARY KEY (`id_bayar`), ADD KEY `pendaftar` (`id_transaksi`), ADD KEY `id_konsumen` (`id_transaksi`);
+  ADD PRIMARY KEY (`id_bayar`),
+  ADD KEY `pendaftar` (`id_transaksi`),
+  ADD KEY `id_konsumen` (`id_transaksi`);
+
+--
+-- Indexes for table `tbl_pembayaran_angsuran`
+--
+ALTER TABLE `tbl_pembayaran_angsuran`
+  ADD PRIMARY KEY (`id_pembayaran`);
 
 --
 -- Indexes for table `tbl_provinsi`
 --
 ALTER TABLE `tbl_provinsi`
- ADD PRIMARY KEY (`id_provinsi`);
+  ADD PRIMARY KEY (`id_provinsi`);
 
 --
 -- Indexes for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
- ADD PRIMARY KEY (`id_transaksi`), ADD KEY `id_konsumen` (`id_konsumen`);
+  ADD PRIMARY KEY (`id_transaksi`),
+  ADD KEY `id_konsumen` (`id_konsumen`);
 
 --
 -- Indexes for table `tbl_transaksi_detail`
 --
 ALTER TABLE `tbl_transaksi_detail`
- ADD PRIMARY KEY (`id_detail`), ADD KEY `id_transaksi` (`id_transaksi`,`id_barang`), ADD KEY `id_barang` (`id_barang`);
+  ADD PRIMARY KEY (`id_detail`),
+  ADD KEY `id_transaksi` (`id_transaksi`,`id_barang`),
+  ADD KEY `id_barang` (`id_barang`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -901,52 +954,62 @@ ALTER TABLE `tbl_transaksi_detail`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `tbl_angsuran`
+--
+ALTER TABLE `tbl_angsuran`
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tbl_biaya_kirim`
 --
 ALTER TABLE `tbl_biaya_kirim`
-MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_informasi`
 --
 ALTER TABLE `tbl_informasi`
-MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tbl_komentar`
 --
 ALTER TABLE `tbl_komentar`
-MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_konsumen`
 --
 ALTER TABLE `tbl_konsumen`
-MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
-MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `tbl_pembayaran_angsuran`
+--
+ALTER TABLE `tbl_pembayaran_angsuran`
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tbl_provinsi`
 --
 ALTER TABLE `tbl_provinsi`
-MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `tbl_transaksi_detail`
 --
 ALTER TABLE `tbl_transaksi_detail`
-MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
