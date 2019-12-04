@@ -1,14 +1,15 @@
 <?php
 
 /*
-  menuAktif($nama_halaman, $judul_halaman, $icon)
-  contoh : menuAktif('beranda', 'Beranda', 'menu-icon fa fa-home')
+  buatMenu($nama_halaman, $judul_halaman, $icon)
+  contoh : 
+  echo buatMenu('beranda', 'Beranda', 'menu-icon fa fa-home')
   Untuk menambahkan menu dengan link ?module=beranda dengan tulisan 'Beranda' dan icon menu-icon fa fa-home
 */
 function buatMenu($nama_halaman, $judul_halaman, $icon)
 {
   $menu = $_GET["module"] == $nama_halaman ? "active open hover highlight" : "hover";
-  echo "<li class='".$menu".'>
+  return "<li class='".$menu."'>
     <a href='?module=".$nama_halaman."'>
         <i class='".$icon."'></i>
         <span class='menu-text'> ".$judul_halaman." </span>
@@ -16,5 +17,50 @@ function buatMenu($nama_halaman, $judul_halaman, $icon)
     <b class='arrow'></b>
   </li>";
 }
+
+
+/*
+  buatSubMenu($judul_halaman, $daftar_menu = array())
+  membuat submenu
+  contoh: 
+  echo buatSubMenu('Transaksi',
+                      array(
+                        array('beranda', 'Beranda', 'menu-icon fa fa-home'),
+                        array('beranda', 'Beranda', 'menu-icon fa fa-home'),
+                        array('beranda', 'Beranda', 'menu-icon fa fa-home'),
+                      )
+                    );
+*/ 
+function buatSubMenu($judul_halaman, $daftar_menu = array())
+{
+  $sub_menu = "";
+  $ketemu = 0;
+  $class = "";
+  foreach($daftar_menu as $menu)
+  {
+    $sub_menu .= buatMenu($menu[0], $menu[1], $menu[2], $menu[3]);
+    if($menu[0] == $_GET['module'])
+    {
+      $ketemu++;
+    }
+  }
+  
+  $class = $ketemu > 0 ? "active open hover highlight" : "hover highlight";
+  
+  return "<li class='".$class."'>
+              <a href='javascript:void(0);' class='dropdown-toggle'>
+                  <i class='menu-icon fa fa-info-circle'></i>
+                  <span class='menu-text'> ".$judul_halaman." </span>
+      
+                  <b class='arrow fa fa-angle-down'></b>
+              </a>
+      
+              <b class='arrow'></b>
+              <ul class='submenu'>
+                ".$sub_menu."
+              </ul>
+          </li>";
+}
+
 
 ?>
