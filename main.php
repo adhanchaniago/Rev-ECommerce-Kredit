@@ -134,7 +134,7 @@ session_start();      // memulai session
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; 2018 - <a href="?module=home">Sport Station</a></p>
+                        <p>Copyright &copy; 2019 - <a href="?module=home">Kopersemar PT. Indonesia Power Semarang</a></p>
                     </div>
                 </div>
             </div>
