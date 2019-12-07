@@ -95,6 +95,17 @@ else {
 		include "modules/pesanan/form.php";
 	}
 	// ---------------------------------------------------------------------------------
+		// jika halaman konten yang dipilih konfirmasi_pesanan, panggil file view konfirmasi_pesanan
+	elseif ($_GET['module']=='konfirmasi_pesanan') {
+		include "modules/konfirmasi_pesanan/view.php";
+	}
+
+	// jika halaman konten yang dipilih form konfirmasi_pesanan, panggil file form konfirmasi_pesanan
+	elseif ($_GET['module']=='form_konfirmasi_pesanan') {
+		include "modules/konfirmasi_pesanan/form.php";
+	}
+	// ---------------------------------------------------------------------------------
+
 	
 	// jika halaman konten yang dipilih konfirmasi, panggil file view konfirmasi
 	elseif ($_GET['module']=='konfirmasi') {

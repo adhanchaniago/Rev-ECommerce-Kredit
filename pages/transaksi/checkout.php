@@ -133,17 +133,44 @@ else {
                                             <td align="right" colspan="5"><strong>Total Pembayaran</strong></td>
                                             <td align="right"><strong>Rp. <?php echo format_rupiah_nol($total_pembayaran); ?></strong></td>
                                         </tr>
-                                    </tbody>           
+                                    </tbody>  
+                          <form method="GET" action="pages/transaksi/proses_order.php">
+                             <tfoot>
+                                <tr >
+                                    <td colspan="5"></td>
+                                    <td colspan="2" ><label>Lama Angsuran</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                     <td colspan="2">  <input type="number" class="form-control     " name="lama_angsuran" placeholder="Jumlah Ex : 12" /></td>
+                                 </tr>
+                                 <hr>
+                                   <tr >
+                                    <td colspan="5"></td>
+                                    <td colspan="2" ><label>Banyak Angsuran</label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"></td>
+                                     <td colspan="2">  <input type="text" class="form-control     " name="banyak_angsuran" placeholder="-" readonly="" /></td>
+                                 </tr>
+                             </tfoot>
                                 </table>
                             </div>
                         </div>
                     </div> <!-- /.panel -->
-
+           
                     <div class="">
                         <a style="width:110px" href="?page=keranjang" class="btn btn-primary">Kembali</a>
                         &nbsp; &nbsp; 
-                        <a href="pages/transaksi/proses_order.php?id_barang=<?php echo $id_barang; ?>&jumlah_beli=<?php echo $jumlah_beli; ?>&jumlah_bayar=<?php echo $jumlah_bayar; ?>&total_pembayaran=<?php echo $total_pembayaran; ?>" class="btn btn-primary pull-right">Proses Order</a>
+
+                        <input type="hidden" name="id_barang" value="<?php echo $id_barang; ?>" />
+                        <input type="hidden" name="jumlah_beli" value="<?php echo $jumlah_beli; ?>" />
+                        <input type="hidden" name="jumlah_bayar" value="<?php echo $jumlah_bayar; ?>" />
+                        <input type="hidden" name="total_pembayaran" value="<?php echo $total_pembayaran; ?>" />
+                        <button type="submit" class="btn btn-primary pull-right">Proses Order</button>
+                        
                     </div>
+            </form>
                 </div> <!-- /.col -->
             </div> <!-- /.row -->
         </div>

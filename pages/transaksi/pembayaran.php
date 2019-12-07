@@ -1,4 +1,6 @@
 <?php  
+
+
 // fungsi untuk pengecekan status login user 
 // jika user belum login, alihkan ke halaman login dan tampilkan pesan = 1
 if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])){
@@ -14,12 +16,12 @@ else { ?>
                 <div class="col-lg-12">
                     <h3 class="page-header">
                         <i style="margin-right:6px" class="fa fa-shopping-cart"></i>
-                        Pembayaran
+                        Transaksi Berhasil Diterima
                     </h3>
                     <ol class="breadcrumb">
                         <li><a href="?page=home">Beranda</a>
                         </li>
-                        <li class="active">Pembayaran</li>
+                        <li class="active">Transaksi Berhasil Diterima</li>
                     </ol>
                 </div>
             </div>
@@ -32,25 +34,66 @@ else { ?>
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <strong><i class="glyphicon glyphicon-ok-circle"></i> Selamat!</strong> Anda telah berhasil melakukan proses pemesanan. <br>
-                        Silahkan lakukan pembayaran ke salah satu rekening kami. Setelah itu lakukan konfirmasi pembayaran melalui menu <strong>Konfirmasi Pembayaran</strong>. Jika pembayaran belum diterima selama 3 hari maka transaksi akan dibatalkan. Terima Kasih
+                        Selanjutnya kami dari admin akan meninjau transaksi anda terlebih dahulu.</strong>
                     </div>
 
                     <div class="panel panel-default">
                         <div class="panel-body">
                         <?php  
-                        $query = mysqli_query($mysqli, "SELECT sum(total_bayar) as total FROM tbl_transaksi
-                                                        WHERE id_konsumen='$_SESSION[id_konsumen]' AND status='Menunggu Pembayaran'")
+                        $query = mysqli_query($mysqli, "SELECT * FROM tbl_transaksi
+                                                        WHERE id_konsumen='$_SESSION[id_konsumen]' AND status='Belum Disetujui' ORDER BY id_transaksi DESC LIMIT 1")
                                                         or die('Ada kesalahan pada query total bayar: '.mysqli_error($mysqli));
                               
                         $data = mysqli_fetch_assoc($query);
+                        $total_bayar = $data['total_bayar'];    
+                        $lama_angsuran = $data['lama_angsuran'];
+                        $besar_angsuran = $data['besar_angsuran'];
+                        $data_pembayaran = array(); // variabel untuk menampung tanggal sebanyak lama angsuran
 
-                        $total_bayar = $data['total'];
+                        // tanggal batas waktu per bulan
+                        // tanggal angsuran pertama atau tanggal sekarang
+                        $tgl_bayar_angsuran_per_bulan = date('Y-m-d', strtotime("+1 months", strtotime(date('Y-m-d'))));
+
+
+                        $data_pembayaran[] = $tgl_bayar_angsuran_per_bulan;
+
+                        for($x = 1; $x < $lama_angsuran; $x++)
+                        {
+                            // tambahkan tanggal angsuran tadi 1 bulan kedepan
+                            $tgl_bayar_angsuran_per_bulan = date('Y-m-d', strtotime("+1 months", strtotime($tgl_bayar_angsuran_per_bulan)));
+                            $data_pembayaran[] = $tgl_bayar_angsuran_per_bulan;
+                        }
+
+
                         ?>
                             <h4>Total yang harus dibayar : Rp. <?php echo format_rupiah_nol($total_bayar); ?></h4>
+                            <h4>Besar angsuran yang harus dibayarkan: Rp. <?php echo format_rupiah_nol($besar_angsuran); ?></h4>
+                            <h4>Lama angsuran Anda: <?php echo format_rupiah_nol($lama_angsuran); ?> Bulan</h4>
+                            <h4>Simulasi Pembayaran Angsuran : </h4>
+                            <table class="table table-bordered table-striped">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Keterangan</th>
+                                    <th>Jumlah yang harus di bayar</th>
+                                    <th>Tanggal jatuh tempo</th>
+                                </tr>
+                                <?php
+                                    foreach ($data_pembayaran as $no => $pembayaran) {
+                                ?>
+                                    <tr>
+                                        <td><?=$no+1?></td>
+                                        <td><?="Angsuran Ke-".($no+1)?></td>
+                                        <td>Rp. <?= format_rupiah_nol($besar_angsuran)?></td>
+                                        <td><?= TanggalIndo($pembayaran)?></td>
+                                    </tr>
+                                <?php
+                                    }
+                                ?>
+                            </table>
                         </div>
                     </div> <!-- /.panel -->
 
-                    <div class="panel panel-default">
+                   <!--  <div class="panel panel-default">
                         <div class="panel-body">
                             <h4>Rekening Pembayaran</h4>
                             <br>
@@ -76,7 +119,7 @@ else { ?>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- /.panel -->
+                    </div> --> <!-- /.panel -->
                 </div> <!-- /.col -->
             </div> <!-- /.row -->
         </div>

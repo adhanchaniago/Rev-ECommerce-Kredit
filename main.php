@@ -1,5 +1,6 @@
 <?php
 session_start();      // memulai session
+require_once "config/helper.php";
 ?>
 
 <!DOCTYPE html>
@@ -134,7 +135,7 @@ session_start();      // memulai session
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; 2018 - <a href="?module=home">Sport Station</a></p>
+                        <p>Copyright &copy; KT-2019 - <a href="?module=home">Sport Station</a></p>
                     </div>
                 </div>
             </div>
