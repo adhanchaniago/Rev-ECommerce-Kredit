@@ -67,20 +67,34 @@ else {
                                                 <td width='80'><?php echo $data1['jumlah']; ?> Barang</td>
                                                 <td width='100' >Rp. <?php echo format_rupiah_nol($data['total_bayar']); ?></td>
                                                 <td width='120'><?php echo $data['status']; ?></td>
-                                                <td width='30' class="center">
+                                                
+                                                
+
+
+                                               
+                                                <td width='10' class="center">
                                                     <div>
                                                         <a data-toggle="tooltip" data-placement="top" title="Detail Angsuran" class="btn btn-primary btn-sm" href="?page=pembelian&form=detail_angsuran&transaksi=<?php echo $data['id_transaksi']; ?>">
                                                             Detail Angsuran
                                                         </a>
                                                     </div>
                                                 </td>
-                                                <td width='30' class="center">
+                                                <td width='10' class="center">
                                                     <div>
                                                         <a data-toggle="tooltip" data-placement="top" title="Detail" class="btn btn-primary btn-sm" href="?page=pembelian&form=detail&transaksi=<?php echo $data['id_transaksi']; ?>">
                                                             Detail
                                                         </a>
                                                     </div>
                                                 </td>
+                                                <?php if($data['status'] == 'Disetujui') { ?>
+                                                <td width='10' class="center">
+                                                    <div>
+                                                        <a data-toggle="tooltip" data-placement="top" title="Lunasi Angsuran" class="btn btn-warning btn-sm" href="?page=pembelian&form=lunasi_angsuran&transaksi=<?php echo $data['id_transaksi']; ?>">
+                                                            lunasi Angsuran
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                                <?php } ?>
                                             </tr>
                                         <?php
                                             $no++;
@@ -358,6 +372,117 @@ else {
     <?php
     }
     /* AKHIR DARI BAGIAN DETAIL ANGSURAN */
+
+    /* BAGIAN LUNASI ANGSURAN*/
+    if ($_GET['form']=='lunasi_angsuran') { 
+        $query = mysqli_query($mysqli, "SELECT * FROM tbl_konsumen as a INNER JOIN tbl_kabkota as b INNER JOIN tbl_provinsi as c 
+                                        ON a.kota=b.id_kabkota AND a.provinsi=c.id_provinsi
+                                        WHERE id_konsumen='$_SESSION[id_konsumen]'")
+                                        or die('Ada kesalahan pada query tampil data konsumen: '.mysqli_error($mysqli));
+
+        $data = mysqli_fetch_assoc($query);
+
+        $id_konsumen   = $data['id_konsumen'];
+        $nama_konsumen = $data['nama_konsumen'];
+        $alamat        = $data['alamat'];
+        $id_kabkota    = $data['id_kabkota'];
+        $nama_kabkota  = $data['nama_kabkota'];
+        $id_provinsi   = $data['id_provinsi'];
+        $nama_provinsi = $data['nama_provinsi'];
+        $kode_pos      = $data['kode_pos'];
+        $telepon       = $data['telepon'];
+        $email         = $data['email'];
+    ?>
+       <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header">
+                            <i style="margin-right:6px" class="fa fa-shopping-cart"></i>
+                            Pelunasan Angsuran
+                        </h3>
+                        <ol class="breadcrumb">
+                            <li><a href="?page=home">Beranda</a>
+                            </li>
+                            <li class="active">Pelunasan Angsuran</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">    
+                                <h4>Alamat Tujuan</h3>
+                                <p>
+                                    <i style="margin-right:7px" class="fa fa-user"></i>
+                                    <?php echo $nama_konsumen; ?>
+                                </p>
+                                <p>
+                                    <i style="margin-right:7px" class="fa fa-map-marker"></i>
+                                    <?php echo $alamat; ?>, <?php echo $nama_kabkota; ?>, <?php echo $nama_provinsi; ?>, <?php echo $kode_pos; ?>
+                                </p>
+                                <p>
+                                    <i style="margin-right:7px" class="fa fa-phone"></i>
+                                    <?php echo $telepon; ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr > 
+                                            <th>No</th>
+                                            <th>Keterangan</th>
+                                            <th>Jumlah yang harus di bayar</th>
+                                            <th>Tanggal jatuh tempo</th>
+                                            </tr>
+                                        </thead>   
+
+                                        <tbody>
+                                        <?php
+                                       
+                                       $detail_angsuran = $mysqli->query("SELECT * from tbl_angsuran where id_transaksi='$_GET[transaksi]'");
+                                        foreach($detail_angsuran as $no => $xx): 
+                                        
+                                        ?>
+                                            <tr>
+                                       <td><?=$no+1?></td>
+                                        <td><?="Angsuran Ke-".($no+1)?></td>
+                                        <td>Rp. <?= format_rupiah_nol($xx['jumlah_bayar'])?></td>
+                                        <td><?= TanggalIndo($xx['batas_bayar'])?></td>
+                                               
+                                            </tr>
+                                        <?php
+                                        endforeach
+                                        ?>           
+                                    </table>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="">
+                            <a style="width:110px" href="?page=pembelian&form=view" class="btn btn-primary">Kembali</a>
+                        </div>
+                    </div> 
+                </div>  -->
+            </div>
+        </div>
+        <!-- /.row -->
+
+        
+    <?php
+    }
+    /* AKHIR DARI BAGIAN LUNASI ANGSURAN */
 }
 ?>
 
