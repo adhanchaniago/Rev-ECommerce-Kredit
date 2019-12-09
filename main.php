@@ -135,7 +135,9 @@ require_once "config/helper.php";
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Copyright &copy; KT-2019 - <a href="?module=home">Sport Station</a></p>
+
+                        <p>Copyright &copy; 2019 - <a href="?module=home">Kopersemar PT. Indonesia Power Semarang</a></p>
+
                     </div>
                 </div>
             </div>

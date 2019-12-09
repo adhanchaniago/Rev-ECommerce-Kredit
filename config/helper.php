@@ -49,7 +49,9 @@ function buatSubMenu($judul_halaman, $icon, $daftar_menu = array())
   
   return "<li class='".$class."'>
               <a href='javascript:void(0);' class='dropdown-toggle'>
+
                   <i class='".$icon."'></i>
+
                   <span class='menu-text'> ".$judul_halaman." </span>
       
                   <b class='arrow fa fa-angle-down'></b>
