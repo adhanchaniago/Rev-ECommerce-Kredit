@@ -7,6 +7,19 @@ if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])){
 }
 // jika user sudah login, maka jalankan perintah untuk ubah password
 else { 
+
+    if ($_GET['alert'] == 7) { ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><i class="glyphicon glyphicon-ok-circle"></i> Sukses!</strong> Pembayaran Angsuran Berhasil Dilakukan, Selanjutnya Admin Akan Meninjau Pembayaran Anda.
+        </div>
+    <?php
+    } 
+
+
+
     if ($_GET['form']=='view') { ?>
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
@@ -334,13 +347,24 @@ else {
                                             <th>Keterangan</th>
                                             <th>Jumlah yang harus di bayar</th>
                                             <th>Tanggal jatuh tempo</th>
+                                            <th>Dibayar</th>
                                             </tr>
                                         </thead>   
 
                                         <tbody>
                                         <?php
                                        
-                                       $detail_angsuran = $mysqli->query("SELECT * from tbl_angsuran where id_transaksi='$_GET[transaksi]'");
+                                       $detail_angsuran = $mysqli->query("Select
+                                       tbl_angsuran.id_transaksi,
+                                       tbl_angsuran.id_angsuran,
+                                       tbl_angsuran.cicilan_ke,
+                                       tbl_angsuran.batas_bayar,
+                                       tbl_angsuran.jumlah_bayar,
+                                       IFNULL(tbl_pembayaran_angsuran.dibayar, 0) AS dibayar 
+                                   From
+                                       tbl_angsuran Left Join 
+                                       (SELECT tbl_pembayaran_angsuran.id_angsuran, SUM(IFNULL(tbl_pembayaran_angsuran.jumlah_bayar, 0)) As dibayar FROM tbl_pembayaran_angsuran WHERE tbl_pembayaran_angsuran.status_pembayaran = 'Dikonfirmasi' GROUP BY tbl_pembayaran_angsuran.id_angsuran) tbl_pembayaran_angsuran
+                                       ON tbl_pembayaran_angsuran.id_angsuran = tbl_angsuran.id_angsuran WHERE  tbl_angsuran.id_transaksi='$_GET[transaksi]'");
                                         foreach($detail_angsuran as $no => $xx): 
                                         
                                         ?>
@@ -349,6 +373,7 @@ else {
                                         <td><?="Angsuran Ke-".($no+1)?></td>
                                         <td>Rp. <?= format_rupiah_nol($xx['jumlah_bayar'])?></td>
                                         <td><?= TanggalIndo($xx['batas_bayar'])?></td>
+                                        <td><?= rupiah($xx['dibayar']) ?></td>
                                                
                                             </tr>
                                         <?php
@@ -385,7 +410,8 @@ else {
         $id_konsumen   = $data['id_konsumen'];
         $nama_konsumen = $data['nama_konsumen'];
         $alamat        = $data['alamat'];
-        $id_kabkota    = $data['id_kabkota'];
+        $id_kabkota    = $data['id_kabkota￼
+        '];
         $nama_kabkota  = $data['nama_kabkota'];
         $id_provinsi   = $data['id_provinsi'];
         $nama_provinsi = $data['nama_provinsi'];
@@ -410,7 +436,7 @@ else {
                     </div>
                 </div>
 
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-body">    
@@ -430,42 +456,67 @@ else {
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-md-12">
 
                         <div class="panel panel-default">
                             <div class="panel-body">
+                                <h3>Pelunasan Angsuran</h3>
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr > 
-                                            <th>No</th>
-                                            <th>Keterangan</th>
-                                            <th>Jumlah yang harus di bayar</th>
-                                            <th>Tanggal jatuh tempo</th>
-                                            </tr>
-                                        </thead>   
+                                   <form action="pages/data-pembelian/proses_angsuran.php"  method="POST" enctype="multipart/form-data" >
+                                 <div class="form-group">
+                                    <?php
+                                        $angsuran_ke = $mysqli->query("Select
+                                        tbl_angsuran.id_transaksi,
+                                        tbl_angsuran.id_angsuran,
+                                        tbl_angsuran.cicilan_ke,
+                                        tbl_angsuran.batas_bayar,
+                                        tbl_angsuran.jumlah_bayar,
+                                        IFNULL(tbl_pembayaran_angsuran.dibayar, 0) AS dibayar 
+                                    From
+                                        tbl_angsuran Left Join 
+                                        (SELECT tbl_pembayaran_angsuran.id_angsuran, SUM(IFNULL(tbl_pembayaran_angsuran.jumlah_bayar, 0)) As dibayar FROM tbl_pembayaran_angsuran WHERE tbl_pembayaran_angsuran.status_pembayaran = 'Dikonfirmasi' GROUP BY tbl_pembayaran_angsuran.id_angsuran) tbl_pembayaran_angsuran
+                                        ON tbl_pembayaran_angsuran.id_angsuran = tbl_angsuran.id_angsuran WHERE tbl_angsuran.id_transaksi = ".$_GET['transaksi']." AND 
+                                        IFNULL(tbl_pembayaran_angsuran.dibayar, 0) < tbl_angsuran.jumlah_bayar 
+                                        ORDER BY tbl_angsuran.id_angsuran ASC LIMIT 1")->fetch_assoc();
 
-                                        <tbody>
-                                        <?php
-                                       
-                                       $detail_angsuran = $mysqli->query("SELECT * from tbl_angsuran where id_transaksi='$_GET[transaksi]'");
-                                        foreach($detail_angsuran as $no => $xx): 
-                                        
-                                        ?>
-                                            <tr>
-                                       <td><?=$no+1?></td>
-                                        <td><?="Angsuran Ke-".($no+1)?></td>
-                                        <td>Rp. <?= format_rupiah_nol($xx['jumlah_bayar'])?></td>
-                                        <td><?= TanggalIndo($xx['batas_bayar'])?></td>
-                                               
-                                            </tr>
-                                        <?php
-                                        endforeach
-                                        ?>           
-                                    </table>
+                                    ?>
+                                    <label for="">Angsuran Ke</label>
+                                    <select name="id_angsuran" id="" class="form-control">
+                                        <option value="<?=$angsuran_ke['id_angsuran']?>">Angsuran Ke-<?=$angsuran_ke['cicilan_ke']?></option>
+                                    </select>
+                                 </div>
+
+                                 <div class="form-group">
+                                     <label for="">Tanggal Bayar</label>
+                                     <input type="date" name="tgl_bayar" class="form-control">
+                                 </div>
+
+                                    <div class="form-group">
+                                        <label for="">Tanggal Jatuh Tempo</label>
+                                        <input type="date" value="<?=$angsuran_ke['batas_bayar']?>" readonly class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Jumlah Yang Harus Dibayarkan</label>
+                                        <input type="number" value="<?=$angsuran_ke['jumlah_bayar']?>" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Jumlah Yang Dibayarkan</label>
+                                        <input type="number" value="<?=$angsuran_ke['jumlah_bayar']?>"  class="form-control" name="jumlah_bayar">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Bukti Pembayaran</label>
+                                        <input type="file" class="form-control" name="bukti_pembayaran">
+                                    </div>
+
+                                    <div>
+                                        <button type="submit" class="btn btn-primary"> Simpan</button>
+                                    </div>
+                                   </form>
                                 </div>
                             </div>
                         </div> 
@@ -474,7 +525,7 @@ else {
                             <a style="width:110px" href="?page=pembelian&form=view" class="btn btn-primary">Kembali</a>
                         </div>
                     </div> 
-                </div>  -->
+                </div> 
             </div>
         </div>
         <!-- /.row -->
