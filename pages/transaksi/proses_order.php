@@ -27,16 +27,18 @@ else {
 		$jumlah_beli      = mysqli_real_escape_string($mysqli, trim($_GET['jumlah_beli']));
 		$jumlah_bayar     = mysqli_real_escape_string($mysqli, trim($_GET['jumlah_bayar']));
 		$total_pembayaran = mysqli_real_escape_string($mysqli, trim($_GET['total_pembayaran']));
+		$lama_angsuran    = mysqli_real_escape_string($mysqli, trim($_GET['lama_angsuran']));
+		$besar_angsuran	  = $total_pembayaran / $lama_angsuran;
 		
 		$id_konsumen  = $_SESSION['id_konsumen'];
 
 		// maka jalankan perintah query untuk menyimpan data ke tabel transaksi
 		$query = mysqli_query($mysqli, "INSERT INTO tbl_transaksi(	id_transaksi,
 																	id_konsumen,
-																 	total_bayar)
+																 	total_bayar, lama_angsuran , besar_angsuran)
 														  	VALUES('$id_transaksi',
 														  	 	   '$id_konsumen',
-																   '$total_pembayaran')")	
+																   '$total_pembayaran','$lama_angsuran','$besar_angsuran')")	
 									or die('Ada kesalahan pada query insert transaksi : '.mysqli_error($mysqli));    
 		// cek query
 		if ($query) {

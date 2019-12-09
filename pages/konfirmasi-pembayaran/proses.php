@@ -12,8 +12,8 @@ if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])){
 }
 // jika user sudah login, maka jalankan perintah untuk ubah password
 else {
-	if (isset($_POST['simpan'])) {
-		// ambil data hasil submit dari form
+    if (isset($_POST['simpan'])) {
+        // ambil data hasil submit dari form
         $id_bayar           = mysqli_real_escape_string($mysqli, trim($_POST['id_bayar']));
         $id_transaksi       = mysqli_real_escape_string($mysqli, trim($_POST['id_transaksi']));
         
@@ -44,6 +44,17 @@ else {
         $file               = explode(".", $nama_file);
         $extension          = array_pop($file);
 
+
+
+// echo "UPDATE tbl_pembayaran SET   tanggal_bayar       = '$tanggal_bayar',
+//                                                                                 rekening_asal       = '$rekening_asal',
+//                                                                                 no_rekening_asal    = '$no_rekening_asal',
+//                                                                                 pemilik_rekening    = '$pemilik_rekening',
+//                                                                                 rekening_tujuan     = '$rekening_tujuan',
+//                                                                                 jumlah_bayar        = '$jumlah_bayar',
+//                                                                                 bukti_bayar         = '$nama_file',
+//                                                                                 status_bayar        = '$status_bayar'
+//                                                                        WHERE    id_bayar            = '$id_bayar'";exit;
         // Cek apakah tipe file yang diupload sesuai dengan allowed_extensions
         if(in_array($extension, $allowed_extensions)) {
             // Jika tipe file yang diupload sesuai dengan allowed_extensions, lakukan :
@@ -88,7 +99,7 @@ else {
         } else {
             // Jika tipe file yang diupload bukan JPG / JPEG / PNG, tampilkan pesan gagal upload
             header("location: ../../main.php?page=konfirmasi&alert=4");
-        } 	
-	}	
+        }   
+    }   
 }
 ?>
