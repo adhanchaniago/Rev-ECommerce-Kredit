@@ -1,11 +1,11 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1 style="color:#585858">
-			<i style="margin-right:7px" class="ace-icon fa fa-retweet"></i> Data Konfirmasi Pembayaran
+			<i style="margin-right:7px" class="ace-icon fa fa-retweet"></i> Data Konfirmasi Pembayaran Angsuran
 		</h1>
 	</div><!-- /.page-header -->
 
-<?php
+	<?php
 // fungsi untuk menampilkan pesan
 // jika alert = "" (kosong)
 // tampilkan pesan "" (kosong)
@@ -18,10 +18,10 @@ elseif ($_GET['alert'] == 1) { ?>
 		<button type="button" class="close" data-dismiss="alert">
 			<i class="ace-icon fa fa-times"></i>
 		</button>
-		<strong><i class="ace-icon fa fa-check-circle"></i> Pembayaran diterima </strong>
+		<strong><i class="ace-icon fa fa-check-circle"></i> Pembayaran Angsuran diterima </strong>
 		<br>
 	</div>
-<?php
+	<?php
 } 
 // jika alert = 2
 // tampilkan pesan Sukses "kategori barang berhasil diubah"
@@ -30,10 +30,10 @@ elseif ($_GET['alert'] == 2) { ?>
 		<button type="button" class="close" data-dismiss="alert">
 			<i class="ace-icon fa fa-times"></i>
 		</button>
-		<strong><i class="ace-icon fa fa-times-circle"></i> Pembayaran ditolak </strong>
+		<strong><i class="ace-icon fa fa-times-circle"></i> Pembayaran Angsuran ditolak </strong>
 		<br>
 	</div>
-<?php
+	<?php
 }
 ?>
 
@@ -54,54 +54,52 @@ elseif ($_GET['alert'] == 2) { ?>
 								<tr>
 									<th>No.</th>
 									<th>Tanggal Pembayaran</th>
-									<th>Konsumen</th>
-									<th>Jumlah</th>
-                                    <th>Total Pembayaran</th>
-                                    <th>Status</th>
+									<th>Jumlah Pembayar</th>
+									<th>Status Pembayaran</th>
+									<th>Pembayaran </th>
+								
 									<th></th>
 								</tr>
 							</thead>
 
 							<tbody>
-							<?php
+								<?php
                             $no = 1;
-                            $query = mysqli_query($mysqli, "SELECT a.id_bayar,a.tanggal_bayar,a.id_transaksi,a.status_bayar,
-                                                            b.id_transaksi,b.tanggal_transaksi,b.id_konsumen,b.total_bayar,
-                                                            c.id_konsumen,c.nama_konsumen
-                                                            FROM tbl_pembayaran as a INNER JOIN tbl_transaksi as b INNER JOIN tbl_konsumen as c
-                                                            ON a.id_transaksi=b.id_transaksi AND b.id_konsumen=c.id_konsumen
-                                                            WHERE a.status_bayar!='Menunggu Pembayaran'
-                                                            ORDER BY a.id_bayar DESC")
+                            $query = mysqli_query($mysqli, "SELECT
+							tbl_pembayaran_angsuran.id_pembayaran,
+							tbl_pembayaran_angsuran.tgl_bayar,
+							tbl_pembayaran_angsuran.jumlah_bayar,
+							tbl_pembayaran_angsuran.status_pembayaran,
+							tbl_angsuran.cicilan_ke
+						From
+							tbl_pembayaran_angsuran Inner Join
+							tbl_angsuran On tbl_angsuran.id_angsuran = tbl_pembayaran_angsuran.id_angsuran
+                                                            WHERE tbl_pembayaran_angsuran.status_pembayaran='Belum Dikonfirmasi'
+                                                            ORDER BY tbl_pembayaran_angsuran.id_pembayaran DESC")
                                                             or die('Ada kesalahan pada query konfirmasi: '.mysqli_error($mysqli));
                       
                             while ($data = mysqli_fetch_assoc($query)) { 
-								$tgl           = $data['tanggal_bayar'];
-								$exp           = explode('-',$tgl);
-								$tanggal_bayar = tgl_eng_to_ind($exp[2]."-".$exp[1]."-".$exp[0]);
-
-                                $query1 = mysqli_query($mysqli, "SELECT COUNT(id_detail) as jumlah FROM tbl_transaksi_detail
-                                                            WHERE id_transaksi='$data[id_transaksi]'")
-                                                            or die('Ada kesalahan pada query detail: '.mysqli_error($mysqli));
+								
                       
-                                $data1 = mysqli_fetch_assoc($query1);
                             ?>
-                            	<tr>
+								<tr>
 									<td width="40" class="center"><?php echo $no; ?></td>
-									<td width="100" class="center"><?php echo $tanggal_bayar; ?></td>
-									<td width="150"><?php echo $data['nama_konsumen']; ?></td>
-									<td width="70" class="center"><?php echo $data1['jumlah']; ?> barang</td>
-									<td width="100" align="right">Rp. <?php echo format_rupiah_nol($data['total_bayar']); ?></td>
-									<td width="150"><?php echo $data['status_bayar']; ?></td>
-
+									<td width="100" class="center"><?php echo TanggalIndo($data['tgl_bayar']); ?></td>
+									<td width="150" align="center"><?php echo rupiah($data['jumlah_bayar']) ; ?></td>
+									<td width="70" class="center"><?php echo $data['status_pembayaran']; ?></td>
+									<td width="100" align="center"><?php echo "Pembayaran Ke-".$data['cicilan_ke']; ?>
+									</td>				
 									<td width="60" class="center">
 										<div class="action-buttons">
-											<a data-rel="tooltip" data-placement="top" title="Detail" class="blue tooltip-info" href="?module=form_konfirmasi&form=detail&id=<?php echo $data['id_bayar']; ?>">
-												<i class="ace-icon fa fa-search-plus bigger-130"></i>
+											<a data-rel="tooltip" data-placement="top" title=""
+												class=""
+												href="?module=form_konfirmasi&form=detail&id=<?php echo $data['id_pembayaran']; ?>">
+												<i class="ace-icon fa fa-search-plus bigger-130">Detail</i>
 											</a>
 										</div>
 									</td>
 								</tr>
-							<?php
+								<?php
                             	$no++;
                             } ?>
 							</tbody>
