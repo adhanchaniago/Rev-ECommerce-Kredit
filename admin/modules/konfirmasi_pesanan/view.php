@@ -18,7 +18,7 @@ elseif ($_GET['alert'] == 1) { ?>
 		<button type="button" class="close" data-dismiss="alert">
 			<i class="ace-icon fa fa-times"></i>
 		</button>
-		<strong><i class="ace-icon fa fa-check-circle"></i> Psesanan Berhasil Disetuji</strong>
+		<strong><i class="ace-icon fa fa-check-circle"></i> Pesanan Berhasil Disetuji</strong>
 		<br>
 	</div>
 <?php

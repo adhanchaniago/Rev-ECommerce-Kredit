@@ -11,70 +11,34 @@ if (empty($_SESSION['username']) && empty($_SESSION['password'])){
 }
 // jika user sudah login, maka jalankan perintah untuk update
 else {
-    if ($_GET['act']=='terima') {
-        if (isset($_GET['bayar'])) {
-            // ambil data hasil submit dari form
-            $id_bayar     = mysqli_real_escape_string($mysqli, trim($_GET['bayar']));
-            $id_transaksi = mysqli_real_escape_string($mysqli, trim($_GET['transaksi']));
-            $id_barang    = mysqli_real_escape_string($mysqli, trim($_GET['barang']));
-            $terjual      = mysqli_real_escape_string($mysqli, trim($_GET['terjual'])) + mysqli_real_escape_string($mysqli, trim($_GET['jumlah']));
-            
-            $status_bayar = 'Pembayaran Diterima';
-            $status       = 'Proses Pengiriman';
 
-            // perintah query untuk mengubah data pada tabel pembayaran
-            $query = mysqli_query($mysqli, "UPDATE tbl_pembayaran SET status_bayar  = '$status_bayar'
-                                                                WHERE id_bayar      = '$id_bayar'")
-                                                        or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
-
-            // cek query
-            if ($query) {
-                // perintah query untuk mengubah data pada tabel transaksi
-                $query1 = mysqli_query($mysqli, "UPDATE tbl_transaksi SET status        = '$status'
-                                                                    WHERE id_transaksi  = '$id_transaksi'")
-                                                            or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
-
-                if ($query1) {
-                    // perintah query untuk mengubah data pada tabel transaksi
-                    $query2 = mysqli_query($mysqli, "UPDATE tbl_barang SET terjual   = '$terjual'
-                                                                     WHERE id_barang = '$id_barang'")
-                                                                or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
-
-                    if ($query2) {
-                        // jika berhasil tampilkan pesan berhasil update data
-                        header("location: ../../main.php?module=konfirmasi&alert=1");
-                    }   
-                } 
-            }       
-        }
+if($_GET['act'] == 'terima'){
+    $id_pembayaran= $_GET['id'];
+    $status = 'Dikonfirmasi';
+    $konfirmasi = $mysqli->query("UPDATE  tbl_pembayaran_angsuran SET status_pembayaran = '$status'");
+    if($konfirmasi){
+        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=1&alert=1");
+    }else{
+        echo "GAGAL";
     }
 
-    elseif ($_GET['act']=='tolak') {
-        if (isset($_GET['bayar'])) {
-            // ambil data hasil submit dari form
-            $id_bayar     = mysqli_real_escape_string($mysqli, trim($_GET['bayar']));
-            $id_transaksi = mysqli_real_escape_string($mysqli, trim($_GET['transaksi']));
-            
-            $status       = 'Pembayaran Ditolak';
 
-            // perintah query untuk mengubah data pada tabel pembayaran
-            $query = mysqli_query($mysqli, "UPDATE tbl_pembayaran SET status_bayar  = '$status'
-                                                                WHERE id_bayar      = '$id_bayar'")
-                                                        or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+}
 
-            // cek query
-            if ($query) {
-                // perintah query untuk mengubah data pada tabel transaksi
-                $query1 = mysqli_query($mysqli, "UPDATE tbl_transaksi SET status        = '$status'
-                                                                    WHERE id_transaksi  = '$id_transaksi'")
-                                                            or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
 
-                if ($query1) {
-                    // jika berhasil tampilkan pesan berhasil update data
-                    header("location: ../../main.php?module=konfirmasi&alert=2");
-                } 
-            }       
-        }
-    }       
+
+if($_GET['act'] == 'tolak'){
+    $id_pembayaran= $_GET['id'];
+    $status = 'Ditolak';
+    $konfirmasi = $mysqli->query("UPDATE  tbl_pembayaran_angsuran SET status_pembayaran = '$status'");
+    if($konfirmasi){
+        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=1&alert=2");
+    }else{
+        echo "GAGAL";
+    }
+
+}
+
+   
 }       
 ?>

@@ -28,15 +28,12 @@ for($x = 1; $x <= $lama_angsuran; $x++)
 // tambahkan tanggal angsuran tadi 1 bulan kedepan
 $tgl_bayar_angsuran_per_bulan = date('Y-m-d', strtotime("+1 months", strtotime($tgl_bayar_angsuran_per_bulan)));
 }
-
- }
-
-
- if($update_status){
-    header("location: ../../main.php?module=konfirmasi_pesanan&alert=1");
+header("location: ../../main.php?module=konfirmasi_pesanan&alert=1");
  }else{
-     header("location: ../../main.php?module=konfirmasi_pesanan&alert=2");
+    header("location: ../../main.php?module=konfirmasi_pesanan&alert=2");
  }
+
+
 
 
 
