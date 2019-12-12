@@ -64,7 +64,7 @@ $rows = mysqli_num_rows($query);
     </head>
     <body>
         <div id="title-perusahaan">
-    Sport Station
+    PT. Indonesia Power Semarang
         </div>
 
         <div id="title-alamat">
@@ -164,7 +164,7 @@ $rows = mysqli_num_rows($query);
         </div>
 
         <div id="footer-nama">
-            Pemilik
+            Pimpinan
         </div>
     </body>
 </html><!-- Akhir halaman HTML yang akan di konvert -->

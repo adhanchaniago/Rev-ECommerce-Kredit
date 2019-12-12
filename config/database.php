@@ -2,7 +2,7 @@
 // deklarasi parameter koneksi database
 $server   = "localhost";
 $username = "root";
-$password = "mysql";
+$password = "";
 $database = "db_penjualan";
 
 // koneksi database
