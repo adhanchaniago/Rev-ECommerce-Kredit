@@ -79,7 +79,9 @@ elseif ($_GET['alert'] == 2) { ?>
 							    tbl_transaksi.status = 'Belum Disetujui'")
                                                             or die('Ada kesalahan pada query konfirmasi: '.mysqli_error($mysqli));
                       
-                            while ($data = mysqli_fetch_assoc($query)) { 
+                            while ($data = mysqli_fetch_assoc($query)) {
+								if($data['nama_konsumen'] != "")
+								{ 
                             ?>
                             	<tr>
 									<td width="40" class="center"><?php echo $no; ?></td>
@@ -104,7 +106,8 @@ elseif ($_GET['alert'] == 2) { ?>
 								</tr>
 							<?php
                             	$no++;
-                            } ?>
+							}
+						 } ?>
 							</tbody>
 						</table>
 					</div>
