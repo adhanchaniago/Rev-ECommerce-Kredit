@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.9
--- https://www.phpmyadmin.net
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 07:33 AM
--- Server version: 5.6.37
--- PHP Version: 5.6.31
+-- Host: localhost
+-- Generation Time: Dec 12, 2019 at 11:38 AM
+-- Server version: 10.4.8-MariaDB
+-- PHP Version: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,13 +28,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_admin`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_admin` (
+CREATE TABLE `tbl_admin` (
   `id_admin` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `nama_admin` varchar(30) NOT NULL,
   `level` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_admin`
@@ -40,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`, `nama_admin`, `level`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator', 'admin'),
-(2, 'pemilik', '827ccb0eea8a706c4c34a16891f84e7b', 'sisi', 'pemilik');
+(2, 'pimpinan', '90973652b88fe07d05a4304f0a945de8', 'Pimpinan', 'pimpinan');
 
 -- --------------------------------------------------------
 
@@ -48,7 +50,7 @@ INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`, `nama_admin`, `leve
 -- Table structure for table `tbl_angsuran`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_angsuran` (
+CREATE TABLE `tbl_angsuran` (
   `id_angsuran` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `cicilan_ke` int(11) NOT NULL,
@@ -62,32 +64,29 @@ CREATE TABLE IF NOT EXISTS `tbl_angsuran` (
 -- Table structure for table `tbl_barang`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_barang` (
+CREATE TABLE `tbl_barang` (
   `id_barang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `tanggal_masuk` date NOT NULL,
-  `nama_barang` varchar(50) NOT NULL,
+  `nama_barang` varchar(255) NOT NULL,
   `deskripsi` text NOT NULL,
   `harga` int(11) NOT NULL,
   `stok` int(11) NOT NULL,
   `terjual` int(11) NOT NULL,
   `gambar` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_barang`
 --
 
 INSERT INTO `tbl_barang` (`id_barang`, `id_kategori`, `tanggal_masuk`, `nama_barang`, `deskripsi`, `harga`, `stok`, `terjual`, `gambar`) VALUES
-(1, 11, '2018-05-03', 'Sepatu Adidas Ace 17.3 FG - Grad', '- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br>\r\n- Sudah Termaksud Box Sesuai Brand Produk<br>\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br>\r\n- Kualitas Import<br>\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)', 145000, 20, 0, '1.jpg'),
-(2, 11, '2018-05-02', 'Sepatu Adidas Ace 17.3 FG - Black', '- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br>\r\n- Sudah Termaksud Box Sesuai Brand Produk<br>\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br>\r\n- Kualitas Import<br>\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)', 145000, 30, 0, '2.jpg'),
-(3, 11, '2018-03-27', 'Nike Mercurial Superfly ACC White Red Black', '- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br>\r\n- Sudah Termaksud Box Sesuai Brand Produk<br>\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br>\r\n- Kualitas Import<br>\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)', 180000, 30, 0, '3.jpg'),
-(4, 12, '2018-05-03', 'Sepatu Futsal Adidas Red White', '- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br>\r\n- Sudah Termaksud Box Sesuai Brand Produk<br>\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br>\r\n- Kualitas Import<br>\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)', 170000, 22, 0, '4.jpg'),
-(5, 13, '2018-05-03', 'Sepatu Basket Nike Paul George', '- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br>\r\n- Sudah Termaksud Box Sesuai Brand Produk<br>\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br>\r\n- Kualitas Import<br>\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)', 299000, 4, 0, '6.jpg'),
-(6, 13, '2018-05-29', 'Jersey Training Basket Indonesia', '<p><span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Training Jersey INDONESIA BASKETBALL (atasan reversible/bolak-balik/2 sisi, bawahan 1 warna)</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Bahan drifit</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">maroon kuning xl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Dongker putih ; XL XXL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Biru muda putih ; L XXL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Biru Putih ; XXL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Hitam Pink : L xxl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Biru Kuning : m l xl xxl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">ABU hjau M L XL XXL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">HITAM HIJAU : L XL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">HITAM ORANYE ; L XL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">MERAH PUTIH ; L XL</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">skyblue putih ; m l xl xxl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">htm skyblue ; l&nbsp;</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">dongkr skyblue : l xl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">dongker kuning M l xl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Stabilo Dongker ; L xl xxl</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">hitan ungu: M L XXL</span><br />\r\n<br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Size Chart Training Jersey (panjang x lebar)</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">S; 70 x 50</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">M : 73 x 53</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">L : 76 x 55</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Xl : 79 x 58</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Xxl : 82 x 62</span></p>', 130000, 10, 0, '9.jpg'),
-(7, 14, '2018-05-29', 'Raket Yonex', '<p><span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">untuk merek yonex&nbsp;</span></p>', 40000, 20, 0, '7.jpeg'),
-(8, 14, '2018-05-29', 'Tas Badminton', '<p><span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">INFORMASI PRODUK ;</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">WARNA MERAH - READY&nbsp;</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">WARNA BIRU - READY</span><br />\r\n<br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">*Spesifikasi :</span><br />\r\n<br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Bahan luar : Synthetic Waterproof D300 Red + Black</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Bahan dalam : Synthetic Waterprood D420</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Dimensi (PxLxT) : 22x17x51</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">Kapasitas : Tergantung pada penataan barang</span><br />\r\n<br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">*Keunggulan tas yang satu ini :</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Desain yang memungkinkan tas ini bisa digunakan untuk harian, bisa untuk tas sekolah, atau untuk bepergian</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Menggunakan bahan waterproof alias anti air yang akan meminimalisir tembus nya air pada saat kehujanan di jalan</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Sangat mirip dengan model tas badminton WILSON</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Menggunakan kepala resleting YKK Asli ( Bukan VKK, YYY, KYY, dst )</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Terdapat banyak saku di bagian samping tas sehingga memudahkan dalam membawa peralatan pribadi anda ( Seperti Handphone, dompet, wristband, dll )</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Penyimpanan raket dilengkapi dengan holder wq raket tetap pada tempat nya</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Main compartment yang luas sehingga memudahkan anda membawa peralatan olahraga ( Seperti sepatu, shuttlecock, handuk, pakaian ganti, dll )</span><br />\r\n<span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">- Tempat penyimpanan raket cukup luas sehingga dapat memuat laptop s/d 14 inch</span></p>', 175000, 20, 0, '8.jpg'),
-(9, 12, '2018-05-29', 'Sepatu Futsal Adidas Ace', '<p>*Harap Cek Stock Size Terlebih Dahulu Sebelum Memesan, Karena Stock Size Dapat Berubah Sewaktu-Waktu (NO CANCEL / REFUND)*</p>\r\n\r\n<p>*Jika Pembeli Tidak Cek Stock Size Terlebih Dahulu Sebelum Memesan Dan Ternyata Barang Tidak Tersedia, Maka Pembeli Dapat Menggantinya Dengan Warna / Model / Size Lain (Konfirmasi Kepada Kami)*</p>\r\n\r\n<p>*Size / Ukuran Dapat Di Ketik Pada Kolom Keterangan Pada Saat Memesan*</p>\r\n\r\n<p>- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br />\r\n- Sudah Termaksud Box Sesuai Brand Produk<br />\r\n- Ready Size 39 40 41 42 43 44 45 (Ready Size Dapat Berubah Sewaktu-Waktu Karena Terus Di Jual)<br />\r\n- Kualitas Import<br />\r\n- Berat Merupakan Pembulatan Sepasang Sepatu + Box (Berat Sepasang Sepatu Berkisar 400-500g)</p>', 150000, 20, 0, '5.jpg');
+(6, 17, '2019-05-29', 'Xiaomi Redmi Note 8', '<p>Xiaomi Redmi Note 8 dibekali layar FHD+ 6.3 inci ditenagai prosesor Qualcomm Snapdragon 665 dipadukan Adreno 610 GPU, dan quad-camera 48MP + 8MP + 2MP + 2MP.</p>', 2600000, 20, 0, 'xi.jpg'),
+(7, 15, '2019-05-29', 'LG 43 in. 43UK6300PTE', '<p><span style=\"color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif\">LED, LCD 43 INC </span>LG 43 in. 49UK6300PTE</p>', 3990000, 13, 0, 'ltv.jpg'),
+(8, 12, '2019-05-29', 'Vespa GTS 150 i-Get ABS', '<p><strong>Vespa</strong> GTS 150 i-Get ABS Piagio degan desain moderen</p>', 2550000, 9, 0, 'vs4.jpg'),
+(9, 16, '2019-05-29', 'Laptop Lenovo Legion R4000Ti', '<p>*Harap Cek Stock&nbsp; Terlebih Dahulu Sebelum Memesan, Karena Stock Dapat Berubah Sewaktu-Waktu (NO CANCEL / REFUND)*</p>\r\n\r\n<p>- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br />\r\n&nbsp;</p>', 1500000, 7, 0, 'lp.jpg'),
+(10, 16, '2019-12-12', 'Asus A407MA-BV001T', '<div>\r\n<ul>\r\n	<li>Layar : 14 Inch</li>\r\n	<li>Prosesor : Intel N4000</li>\r\n	<li>Tipe Grafis : Intel HD Graphics</li>\r\n	<li>Memory : RAM 4 GB dan HDD 1TB</li>\r\n	<li>Sistem Operasi : Windows 10</li>\r\n	<li>Asus A407MA-BV001T Notebook - Grey [14 Inch/ N4000/ 4GB/ 1TB/ Win10] Grey</li>\r\n</ul>\r\n</div>', 3750000, 12, 0, 'assuslp.jpg'),
+(11, 13, '2019-12-12', 'Mitsubishi Xpander', '<table class=\"keyfeature-table\">\r\n	<tbody>\r\n		<tr>\r\n			<td><strong>Harga OTR(Jakarta Selatan)</strong></td>\r\n			<td>Rp&nbsp;212,3 Juta*</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Pilihan Angsuran</strong></td>\r\n			<td>Rp&nbsp;4,84 Juta <a class=\"button-link\" href=\"https://www.oto.com/mobil-baru/mitsubishi/xpander/harga\" title=\"Detail Harga Xpander\">Detail Harga Xpander</a></td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Mesin</strong></td>\r\n			<td>1499 cc</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tenaga</strong></td>\r\n			<td>103 hp</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tempat Duduk</strong></td>\r\n			<td>7 Kursi</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Jenis Transmisi</strong></td>\r\n			<td>Manual</td>\r\n		</tr>\r\n	</tbody>\r\n</table>', 267000000, 212000000, 0, 'oto.jpg');
 
 -- --------------------------------------------------------
 
@@ -95,21 +94,12 @@ INSERT INTO `tbl_barang` (`id_barang`, `id_kategori`, `tanggal_masuk`, `nama_bar
 -- Table structure for table `tbl_biaya_kirim`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_biaya_kirim` (
+CREATE TABLE `tbl_biaya_kirim` (
   `id_biaya` int(11) NOT NULL,
   `provinsi` int(4) NOT NULL,
   `kabkota` int(2) NOT NULL,
   `biaya` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_biaya_kirim`
---
-
-INSERT INTO `tbl_biaya_kirim` (`id_biaya`, `provinsi`, `kabkota`, `biaya`) VALUES
-(2, 6, 71, 10000),
-(3, 6, 78, 30000),
-(8, 6, 79, 20000);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -117,19 +107,19 @@ INSERT INTO `tbl_biaya_kirim` (`id_biaya`, `provinsi`, `kabkota`, `biaya`) VALUE
 -- Table structure for table `tbl_informasi`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_informasi` (
+CREATE TABLE `tbl_informasi` (
   `id_informasi` int(11) NOT NULL,
   `judul` varchar(50) NOT NULL,
   `keterangan` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_informasi`
 --
 
 INSERT INTO `tbl_informasi` (`id_informasi`, `judul`, `keterangan`) VALUES
-(1, 'Tentang Kami', '<h3 style="text-align:justify"><font color="#000000" face="monospace"><span style="font-size:22px">SPORT STATION</span></font></h3>\r\n\r\n<p><span style="font-size:16px"><font color="#000000" face="monospace">Alamat : Jl. Lame Blok Masjid No.41 Jatikarya, Jatisampura,Bekasi, Jawa Barat,17435</font></span></p>\r\n\r\n<p><span style="font-size:16px"><font color="#000000" face="monospace">Kontak : 081284802432</font></span></p>'),
-(2, 'Cara Pemesanan', '<p style="text-align:justify">1. Klik pada tombol &#39;Beli&#39; pada barang yang ingin Anda beli/pesan.</p>\r\n\r\n<p style="text-align:justify">2. Barang yang Anda beli/pesan akan masuk ke dalam Keranjang Belanja. Anda dapat menentukan berapa jumlah yang akan dibeli, kemudian klik tombol &#39;Simpan&#39;.</p>\r\n\r\n<p style="text-align:justify">3. Jika sudah selesai, klik tombol &#39;Selesai Belanja&#39; maka akan tampil data pembeli beserta barang yang dibeli/dipesannya. kemudian klik tombol &#39;Proses Order&#39; maka akan tampil total pembayaran serta nomor rekening pembayaran.</p>\r\n\r\n<p style="text-align:justify">4. Apabila telah melakukan pembayaran, maka barang yang dibeli/dipesan akan segera dikirimkan.</p>\r\n\r\n<p style="text-align:justify">&nbsp;</p>\r\n\r\n<p style="text-align:justify">&nbsp;</p>');
+(1, 'Tentang Kami', '<h3 style=\"text-align:justify\"><span style=\"font-size:22px\">PT. INDONESIA POWER SEMARANG</span></h3>\r\n\r\n<p><span style=\"font-size:16px\">Alamat : Jl. Lame Blok M No.41 ,Semarang, Jawa Tengah,17435</span></p>\r\n\r\n<p><span style=\"font-size:16px\">Kontak : 081284802432</span></p>'),
+(2, 'Cara Pemesanan', '<p style=\"text-align:justify\">1. Klik pada tombol &#39;Beli&#39; pada barang yang ingin Anda beli/pesan.</p>\r\n\r\n<p style=\"text-align:justify\">2. Barang yang Anda beli/pesan akan masuk ke dalam Keranjang Belanja. Anda dapat menentukan berapa jumlah yang akan dibeli, kemudian klik tombol &#39;Simpan&#39;.</p>\r\n\r\n<p style=\"text-align:justify\">3. Jika sudah selesai, klik tombol &#39;Selesai Belanja&#39; maka akan tampil data pembeli beserta barang yang dibeli/dipesannya. kemudian klik tombol &#39;Proses Order&#39; maka akan tampil data cicilan pembayaran.</p>\r\n\r\n<p style=\"text-align:justify\">4. Apabila telah melakukan pembayaran, maka barang yang dibeli/dipesan akan segera dikirimkan.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>');
 
 -- --------------------------------------------------------
 
@@ -137,7 +127,7 @@ INSERT INTO `tbl_informasi` (`id_informasi`, `judul`, `keterangan`) VALUES
 -- Table structure for table `tbl_kabkota`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_kabkota` (
+CREATE TABLE `tbl_kabkota` (
   `id_kabkota` int(4) NOT NULL,
   `nama_kabkota` varchar(50) NOT NULL,
   `id_provinsi` int(2) NOT NULL
@@ -629,21 +619,21 @@ INSERT INTO `tbl_kabkota` (`id_kabkota`, `nama_kabkota`, `id_provinsi`) VALUES
 -- Table structure for table `tbl_kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_kategori` (
+CREATE TABLE `tbl_kategori` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_kategori`
 --
 
 INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
-(11, 'Sepak Bola'),
-(12, 'Futsal'),
-(13, 'Basket'),
-(14, 'Bulu Tangkis'),
-(15, 'Volley');
+(12, 'Motor'),
+(13, 'Mobil'),
+(15, 'TV'),
+(16, 'Laptop'),
+(17, 'Handphone');
 
 -- --------------------------------------------------------
 
@@ -651,16 +641,16 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- Table structure for table `tbl_komentar`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_komentar` (
+CREATE TABLE `tbl_komentar` (
   `id_komentar` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_konsumen` int(11) NOT NULL,
   `komentar` text NOT NULL,
   `status` enum('y','n') NOT NULL DEFAULT 'n',
-  `balas` int(11) NOT NULL DEFAULT '0',
+  `balas` int(11) NOT NULL DEFAULT 0,
   `rating` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_komentar`
@@ -677,9 +667,9 @@ INSERT INTO `tbl_komentar` (`id_komentar`, `id_barang`, `tanggal`, `id_konsumen`
 -- Table structure for table `tbl_konsumen`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_konsumen` (
+CREATE TABLE `tbl_konsumen` (
   `id_konsumen` int(11) NOT NULL,
-  `tanggal_daftar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tanggal_daftar` timestamp NOT NULL DEFAULT current_timestamp(),
   `nama_konsumen` varchar(30) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `kota` int(4) NOT NULL,
@@ -688,7 +678,7 @@ CREATE TABLE IF NOT EXISTS `tbl_konsumen` (
   `telepon` varchar(12) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_konsumen`
@@ -696,8 +686,7 @@ CREATE TABLE IF NOT EXISTS `tbl_konsumen` (
 
 INSERT INTO `tbl_konsumen` (`id_konsumen`, `tanggal_daftar`, `nama_konsumen`, `alamat`, `kota`, `provinsi`, `kode_pos`, `telepon`, `email`, `password`) VALUES
 (47, '2018-05-05 08:46:52', 'Ferri', 'Jl. Berok Raya', 415, 18, '25146', '082170214455', 'vendry7@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b'),
-(50, '2018-05-05 09:34:53', 'hjj', 'hjhjjhj', 71, 6, '89898', '98989898', 'suhudsatu@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b'),
-(51, '2018-05-14 14:02:28', 'joko', 'padang', 20, 22, '25146', '082170216', 'joko@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b');
+(52, '2019-12-05 08:06:59', 'rafi sahendra', 'padang panjang', 98, 3, '27683', '085363229539', 'rafisahendra07@gmail.com', 'fafae7c0cbe4b1aa33bb9abd857e80c4');
 
 -- --------------------------------------------------------
 
@@ -705,7 +694,7 @@ INSERT INTO `tbl_konsumen` (`id_konsumen`, `tanggal_daftar`, `nama_konsumen`, `a
 -- Table structure for table `tbl_pembayaran`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_pembayaran` (
+CREATE TABLE `tbl_pembayaran` (
   `id_bayar` int(11) NOT NULL,
   `tanggal_bayar` date NOT NULL,
   `id_transaksi` int(11) NOT NULL,
@@ -716,14 +705,19 @@ CREATE TABLE IF NOT EXISTS `tbl_pembayaran` (
   `jumlah_bayar` int(11) NOT NULL,
   `bukti_bayar` varchar(200) NOT NULL,
   `status_bayar` varchar(30) NOT NULL DEFAULT 'Menunggu Pembayaran'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_pembayaran`
 --
 
 INSERT INTO `tbl_pembayaran` (`id_bayar`, `tanggal_bayar`, `id_transaksi`, `rekening_asal`, `no_rekening_asal`, `pemilik_rekening`, `rekening_tujuan`, `jumlah_bayar`, `bukti_bayar`, `status_bayar`) VALUES
-(1, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran');
+(3, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
+(4, '0000-00-00', 2, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
+(5, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
+(6, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
+(7, '0000-00-00', 2, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
+(8, '0000-00-00', 3, '', '', '', '', 0, '', 'Menunggu Pembayaran');
 
 -- --------------------------------------------------------
 
@@ -731,12 +725,13 @@ INSERT INTO `tbl_pembayaran` (`id_bayar`, `tanggal_bayar`, `id_transaksi`, `reke
 -- Table structure for table `tbl_pembayaran_angsuran`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_pembayaran_angsuran` (
+CREATE TABLE `tbl_pembayaran_angsuran` (
   `id_pembayaran` int(11) NOT NULL,
   `id_angsuran` int(11) NOT NULL,
   `tgl_bayar` date NOT NULL,
-  `jumlah_bayar_angsuran` int(11) NOT NULL,
-  `status_pembayaran` enum('Dikonfirmasi','Belum Dikonfirmasi','Ditolak','','') NOT NULL
+  `jumlah_bayar` int(11) NOT NULL,
+  `status_pembayaran` enum('Belum Dikonfirmasi','Dikonfirmasi','Ditolak','','') NOT NULL DEFAULT 'Belum Dikonfirmasi',
+  `bukti_pembayaran` varchar(191) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -745,10 +740,10 @@ CREATE TABLE IF NOT EXISTS `tbl_pembayaran_angsuran` (
 -- Table structure for table `tbl_provinsi`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_provinsi` (
+CREATE TABLE `tbl_provinsi` (
   `id_provinsi` int(2) NOT NULL,
   `nama_provinsi` varchar(40) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_provinsi`
@@ -796,20 +791,15 @@ INSERT INTO `tbl_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 -- Table structure for table `tbl_transaksi`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_transaksi` (
+CREATE TABLE `tbl_transaksi` (
   `id_transaksi` int(11) NOT NULL,
-  `tanggal_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tanggal_transaksi` timestamp NOT NULL DEFAULT current_timestamp(),
   `id_konsumen` int(11) NOT NULL,
   `total_bayar` int(11) NOT NULL,
-  `status` varchar(50) NOT NULL DEFAULT 'Menunggu Pembayaran'
+  `status` enum('Belum Disetujui','Disetujui','Ditolak','') NOT NULL DEFAULT 'Belum Disetujui',
+  `lama_angsuran` int(11) NOT NULL,
+  `besar_angsuran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_transaksi`
---
-
-INSERT INTO `tbl_transaksi` (`id_transaksi`, `tanggal_transaksi`, `id_konsumen`, `total_bayar`, `status`) VALUES
-(1, '2018-05-06 12:44:15', 50, 3009000, 'Menunggu Pembayaran');
 
 -- --------------------------------------------------------
 
@@ -817,20 +807,13 @@ INSERT INTO `tbl_transaksi` (`id_transaksi`, `tanggal_transaksi`, `id_konsumen`,
 -- Table structure for table `tbl_transaksi_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_transaksi_detail` (
+CREATE TABLE `tbl_transaksi_detail` (
   `id_detail` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_transaksi_detail`
---
-
-INSERT INTO `tbl_transaksi_detail` (`id_detail`, `id_transaksi`, `id_barang`, `jumlah_beli`, `jumlah_bayar`) VALUES
-(1, 1, 5, 1, 2999000);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -838,12 +821,19 @@ INSERT INTO `tbl_transaksi_detail` (`id_detail`, `id_transaksi`, `id_barang`, `j
 -- Table structure for table `tbl_transaksi_tmp`
 --
 
-CREATE TABLE IF NOT EXISTS `tbl_transaksi_tmp` (
+CREATE TABLE `tbl_transaksi_tmp` (
   `id_konsumen` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_transaksi_tmp`
+--
+
+INSERT INTO `tbl_transaksi_tmp` (`id_konsumen`, `id_barang`, `jumlah_beli`, `jumlah_bayar`) VALUES
+(52, 9, 1, 1500000);
 
 --
 -- Indexes for dumped tables
@@ -954,62 +944,75 @@ ALTER TABLE `tbl_transaksi_detail`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `tbl_angsuran`
 --
 ALTER TABLE `tbl_angsuran`
-  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
 --
 -- AUTO_INCREMENT for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `tbl_biaya_kirim`
 --
 ALTER TABLE `tbl_biaya_kirim`
-  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `tbl_informasi`
 --
 ALTER TABLE `tbl_informasi`
-  MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `tbl_komentar`
 --
 ALTER TABLE `tbl_komentar`
-  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `tbl_konsumen`
 --
 ALTER TABLE `tbl_konsumen`
-  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
-  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran_angsuran`
 --
 ALTER TABLE `tbl_pembayaran_angsuran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `tbl_provinsi`
 --
 ALTER TABLE `tbl_provinsi`
-  MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+  MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT for table `tbl_transaksi_detail`
 --
 ALTER TABLE `tbl_transaksi_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
