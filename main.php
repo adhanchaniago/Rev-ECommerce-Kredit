@@ -12,7 +12,7 @@ require_once "config/helper.php";
         <meta name="description" content="TioFashion">
         <meta name="author" content="TokoTioFashion">
 
-        <title>Sport Station</title>
+        <title>PT. Indonesia Power Semarang</title>
 
         <!-- favicon -->
         <link rel="shortcut icon" href="admin/assets/img/favicon.png">
