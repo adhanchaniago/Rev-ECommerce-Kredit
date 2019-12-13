@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Login | Toko Handphone</title>
+		<title>Login | </title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	    <meta name="description" content="TokoTioFashion" />
@@ -72,7 +72,7 @@
 															<select name="level" class="form-control">
 															<option value="">--Plih Level--</option>
 															<option value="admin">Admin</option>
-															<option value="pemilik">Pemilik</option>
+															<option value="pimpinan">Pimpinan</option>
 															</select>
 																<div class="space"></div>
 													<div class="clearfix">

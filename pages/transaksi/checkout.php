@@ -134,7 +134,27 @@ else {
                                             <td align="right"><strong>Rp. <?php echo format_rupiah_nol($total_pembayaran); ?></strong></td>
                                         </tr>
                                     </tbody>  
-                          <form method="GET" action="pages/transaksi/proses_order.php">
+<!-- SCRIPT -->
+
+<script type="text/javascript">
+    
+   function hitung_jumlah_angsuran() {
+        var bil1 = <?= $total_pembayaran ?>;
+        var bil2 = document.formAngsuran.lama_angsuran.value;
+        if ( isNaN(bil2) || bil1 =="" || bil1 == 0) {
+            var hasil = 0;
+        } 
+        else {
+            var hasil = bil1 / bil2;
+        };
+        document.formAngsuran.banyak_angsuran.value="Rp. " + (hasil);
+      
+    }
+
+</script>
+<!-- /SCRIPT -->
+                          <form method="GET" action="pages/transaksi/proses_order.php" name="formAngsuran">
+                           
                              <tfoot>
                                 <tr >
                                     <td colspan="5"></td>
@@ -142,7 +162,7 @@ else {
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                     <td colspan="2">  <input type="number" class="form-control     " name="lama_angsuran" placeholder="Jumlah Ex : 12" /></td>
+                                     <td colspan="2">  <input type="number" class="form-control" id="lama_angsuran" name="lama_angsuran"   autocomplete="off" onKeyPress="return goodchars(event,'0123456789',this)" onkeyup="hitung_jumlah_angsuran(this)" /></td>
                                  </tr>
                                  <hr>
                                    <tr >
@@ -151,7 +171,7 @@ else {
                                 </tr>
                                 <tr>
                                     <td colspan="4"></td>
-                                     <td colspan="2">  <input type="text" class="form-control     " name="banyak_angsuran" placeholder="-" readonly="" /></td>
+                                     <td colspan="2">  <input type="text" class="form-control" id="banyak_angsuran" name="banyak_angsuran" readonly="" /></td>
                                  </tr>
                              </tfoot>
                                 </table>

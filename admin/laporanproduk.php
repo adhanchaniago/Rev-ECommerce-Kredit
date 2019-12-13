@@ -15,7 +15,7 @@ $tgl = date('M Y');
 							<tr>
 							<td><div align="center">
 							<div align="center">
-						      Sport Station<br>Laporan Data Produk<br></div>
+						      PT. Indonesia Power Semarang<br>Laporan Data Produk<br></div>
 							 </td>
 							</tr>
 							</table>
@@ -64,7 +64,7 @@ $no++;
 </td>
  <td width="37%" bgcolor="#FFFFFF"><div align="center"> <?php $tgl = date('d M Y');
 echo " $tgl";?><br/>
-Pemilik
+Pimpinan
 <br/><br/>
 <br/><br/>
 (...............................)

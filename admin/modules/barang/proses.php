@@ -49,8 +49,8 @@ else {
                     if(move_uploaded_file($tmp_file, $path)) { // Cek apakah gambar berhasil diupload atau tidak
                         // Jika gambar berhasil diupload, Lakukan : 
                         // perintah query untuk menyimpan data ke tabel barang
-                        $query = mysqli_query($mysqli, "INSERT INTO tbl_barang(id_kategori,tanggal_masuk,nama_barang,deskripsi,harga,stok,gambar)
-                                                        VALUES('$id_kategori','$tanggal_masuk','$nama_barang','$deskripsi','$harga','$stok','$nama_file')")
+                        $query = mysqli_query($mysqli, "INSERT INTO tbl_barang(id_kategori,tanggal_masuk,nama_barang,deskripsi,harga,stok,terjual,gambar)
+                                                        VALUES('$id_kategori','$tanggal_masuk','$nama_barang','$deskripsi','$harga','$stok','0','$nama_file')")
                                                         or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
 
                         // cek query

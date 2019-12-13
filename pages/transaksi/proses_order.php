@@ -61,13 +61,6 @@ else {
 
 			// cek query
 			if ($query1) {
-				// perintah query untuk menghapus data pada tabel tmp transaksi
-		        $query2 = mysqli_query($mysqli, "INSERT INTO tbl_pembayaran(id_transaksi)
-															  		 VALUES('$id_transaksi')")	
-										or die('Ada kesalahan pada query insert pembayaran : '.mysqli_error($mysqli));    
-
-		        // cek hasil query
-		        if ($query2) {
 					// perintah query untuk menghapus data pada tabel tmp transaksi
 			        $query3 = mysqli_query($mysqli, "DELETE FROM tbl_transaksi_tmp WHERE id_konsumen='$id_konsumen'")
 			                                        or die('Ada kesalahan pada query delete : '.mysqli_error($mysqli));
@@ -77,7 +70,7 @@ else {
 						// jika berhasil tampilkan pesan berhasil simpan data
 						header("location: ../../main.php?page=pembayaran");
 			        }
-		        }
+		        
 			}
 		}	
 	}	

@@ -1,7 +1,7 @@
 <ul class="nav nav-list"> 
 <?php
  include "../config/helper.php";
- if ($_SESSION['level'] == 'pemilik'){
+ if ($_SESSION['level'] == 'pimpinan'){
 ?>
 <?php 
 // fungsi untuk pengecekan menu aktif
@@ -39,8 +39,8 @@ echo buatMenu('biaya_kirim', 'Biaya Kirim', 'menu-icon fa fa-truck','main.php?mo
 // jika menu pesanan dipilih, menu pesanan aktif
 echo buatSubMenu('Transaksi','menu-icon fa fa-shopping-cart',
                       array(
-                        array('pesanan', 'Pesanan', 'fa fa-caret-right'),
-                        array('konfirmasi_pesanan', 'Konfirmasi Pesanan', 'fa fa-caret-right','main.php?module=pesanan'),
+                        array('pesanan', 'Pesanan', 'fa fa-caret-right','main.php?module=pesanan'),
+                        array('konfirmasi_pesanan', 'Konfirmasi Pesanan', 'fa fa-caret-right','main.php?module=konfirmasi_pesanan'),
                         array('konfirmasi', 'Konfirmasi Pembayaran', 'fa fa-caret-right','main.php?module=konfirmasi'),
                       )
                     );

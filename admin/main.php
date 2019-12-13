@@ -7,7 +7,7 @@ session_start();      // memulai session
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Admin Panel | Sport Station </title>
+		<title>Admin Panel |  </title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 	    <meta name="description" content="TokoTioFashion" />
@@ -108,7 +108,7 @@ session_start();      // memulai session
 				<div class="navbar-header pull-left">
 					<a href="index.html" class="navbar-brand">
 						<small>
-							Sport Station
+						PT. Indonesia Power Semarang
 						</small>
 					</a>
 
@@ -202,7 +202,7 @@ session_start();      // memulai session
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							&copy; 2018 - Sport Station
+							&copy; 2019 - Kopersemar PT. Indonesia Power Semarang
 						</span>
 					</div>
 				</div>

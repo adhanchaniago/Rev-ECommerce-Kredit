@@ -17,7 +17,7 @@ if($_GET['act'] == 'terima'){
     $status = 'Dikonfirmasi';
     $konfirmasi = $mysqli->query("UPDATE  tbl_pembayaran_angsuran SET status_pembayaran = '$status'");
     if($konfirmasi){
-        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=1&alert=1");
+        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=$id_pembayaran&alert=1");
     }else{
         echo "GAGAL";
     }
@@ -32,7 +32,7 @@ if($_GET['act'] == 'tolak'){
     $status = 'Ditolak';
     $konfirmasi = $mysqli->query("UPDATE  tbl_pembayaran_angsuran SET status_pembayaran = '$status'");
     if($konfirmasi){
-        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=1&alert=2");
+        header("location: ../../main.php?module=form_konfirmasi&form=detail&id=$id_pembayaran&alert=2");
     }else{
         echo "GAGAL";
     }

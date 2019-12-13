@@ -18,15 +18,14 @@ else {
                     <div class="col-lg-12">
                     <br><br>
                 <?php  
-                  if ($_GET['alert'] == 7) { ?>
+                  if (@$_GET['alert'] == 7) { ?>
                         <div class="alert alert-success alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <strong><i class="glyphicon glyphicon-ok-circle"></i> Sukses!</strong> Pembayaran Angsuran Berhasil Dilakukan, Selanjutnya Admin Akan Meninjau Pembayaran Anda.
                         </div>
-               <?php }
-                    ?>
+               <?php }  ?>
                         <h3 class="page-header">
                             <i style="margin-right:6px" class="fa fa-shopping-cart"></i>
                             Data Pembelian

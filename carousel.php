@@ -9,19 +9,19 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <div class="fill" style="background-image:url('images/slide/banner.jpg');"></div>
+            <div class="fill" style="background-image:url('images/slide/tiga.jpg');"></div>
             <div class="carousel-caption">
                 <h2>Selamat Datang !!</h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('images/slide/2.png');"></div>
+            <div class="fill" style="background-image:url('images/slide/satu.jpg');"></div>
             <div class="carousel-caption">
                 <h2></h2>
             </div>
         </div>
         <div class="item">
-            <div class="fill" style="background-image:url('images/slide/3.png');"></div>
+            <div class="fill" style="background-image:url('images/slide/dua.jpg');"></div>
             <div class="carousel-caption">
                 <h2></h2>
             </div>
