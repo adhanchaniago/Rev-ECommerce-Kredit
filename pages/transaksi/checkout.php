@@ -154,7 +154,7 @@ else {
 </script>
 <!-- /SCRIPT -->
                           <form method="GET" action="pages/transaksi/proses_order.php" name="formAngsuran">
-                            <input type="text" name="total_pembayaran" id="total_pembayaran" value="<?= $total_pembayaran ?>">
+                           
                              <tfoot>
                                 <tr >
                                     <td colspan="5"></td>

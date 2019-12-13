@@ -134,15 +134,15 @@ if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])) {
 
               <li role="separator" class="divider"></li>
 
-              <li>
-                <a href="?page=konfirmasi"><i class="fa fa-caret-right"></i> Konfirmasi Pembayaran</a>
-              </li>
+                <!-- <li>
+                  <a href="?page=konfirmasi"><i class="fa fa-caret-right"></i> Konfirmasi Pembayaran</a>
+                </li>
 
-              <li role="separator" class="divider"></li>
+                <li role="separator" class="divider"></li>
 
-              <li>
-                <a href="?page=penerimaan"><i class="fa fa-caret-right"></i> Konfirmasi Penerimaan</a>
-              </li>
+                <li>
+                  <a href="?page=penerimaan"><i class="fa fa-caret-right"></i> Konfirmasi Penerimaan</a>
+                </li> -->
           </ul>
       </li>
   <?php
@@ -164,7 +164,7 @@ if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])) {
                 <a href="?page=pembelian&form=view"><i class="fa fa-caret-right"></i> Daftar Pembelian</a>
               </li>
 
-              <li role="separator" class="divider"></li>
+              <!-- <li role="separator" class="divider"></li>
 
               <li>
                 <a href="?page=konfirmasi"><i class="fa fa-caret-right"></i> Konfirmasi Pembayaran</a>
@@ -174,7 +174,7 @@ if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])) {
 
               <li>
                 <a href="?page=penerimaan"><i class="fa fa-caret-right"></i> Konfirmasi Penerimaan</a>
-              </li>
+              </li> -->
           </ul>
       </li>
   <?php

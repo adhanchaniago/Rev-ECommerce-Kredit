@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
--- https://www.phpmyadmin.net/
+-- version 4.4.15.9
+-- https://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Dec 12, 2019 at 11:38 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.10
+-- Host: 127.0.0.1
+-- Generation Time: Dec 13, 2019 at 07:03 AM
+-- Server version: 5.6.37
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,13 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_admin`
 --
 
-CREATE TABLE `tbl_admin` (
+CREATE TABLE IF NOT EXISTS `tbl_admin` (
   `id_admin` int(11) NOT NULL,
   `username` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL,
   `nama_admin` varchar(30) NOT NULL,
   `level` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_admin`
@@ -50,13 +48,31 @@ INSERT INTO `tbl_admin` (`id_admin`, `username`, `password`, `nama_admin`, `leve
 -- Table structure for table `tbl_angsuran`
 --
 
-CREATE TABLE `tbl_angsuran` (
+CREATE TABLE IF NOT EXISTS `tbl_angsuran` (
   `id_angsuran` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `cicilan_ke` int(11) NOT NULL,
   `batas_bayar` date NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_angsuran`
+--
+
+INSERT INTO `tbl_angsuran` (`id_angsuran`, `id_transaksi`, `cicilan_ke`, `batas_bayar`, `jumlah_bayar`) VALUES
+(84, 1, 1, '2020-01-13', 316250),
+(85, 1, 2, '2020-02-13', 316250),
+(86, 1, 3, '2020-03-13', 316250),
+(87, 1, 4, '2020-04-13', 316250),
+(88, 1, 5, '2020-05-13', 316250),
+(89, 1, 6, '2020-06-13', 316250),
+(90, 1, 7, '2020-07-13', 316250),
+(91, 1, 8, '2020-08-13', 316250),
+(92, 1, 9, '2020-09-13', 316250),
+(93, 1, 10, '2020-10-13', 316250),
+(94, 1, 11, '2020-11-13', 316250),
+(95, 1, 12, '2020-12-13', 316250);
 
 -- --------------------------------------------------------
 
@@ -64,7 +80,7 @@ CREATE TABLE `tbl_angsuran` (
 -- Table structure for table `tbl_barang`
 --
 
-CREATE TABLE `tbl_barang` (
+CREATE TABLE IF NOT EXISTS `tbl_barang` (
   `id_barang` int(11) NOT NULL,
   `id_kategori` int(11) NOT NULL,
   `tanggal_masuk` date NOT NULL,
@@ -74,7 +90,7 @@ CREATE TABLE `tbl_barang` (
   `stok` int(11) NOT NULL,
   `terjual` int(11) NOT NULL,
   `gambar` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_barang`
@@ -82,11 +98,11 @@ CREATE TABLE `tbl_barang` (
 
 INSERT INTO `tbl_barang` (`id_barang`, `id_kategori`, `tanggal_masuk`, `nama_barang`, `deskripsi`, `harga`, `stok`, `terjual`, `gambar`) VALUES
 (6, 17, '2019-05-29', 'Xiaomi Redmi Note 8', '<p>Xiaomi Redmi Note 8 dibekali layar FHD+ 6.3 inci ditenagai prosesor Qualcomm Snapdragon 665 dipadukan Adreno 610 GPU, dan quad-camera 48MP + 8MP + 2MP + 2MP.</p>', 2600000, 20, 0, 'xi.jpg'),
-(7, 15, '2019-05-29', 'LG 43 in. 43UK6300PTE', '<p><span style=\"color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif\">LED, LCD 43 INC </span>LG 43 in. 49UK6300PTE</p>', 3990000, 13, 0, 'ltv.jpg'),
+(7, 15, '2019-05-29', 'LG 43 in. 43UK6300PTE', '<p><span style="color:rgb(96, 96, 96); font-family:open sans,tahoma,sans-serif">LED, LCD 43 INC </span>LG 43 in. 49UK6300PTE</p>', 3990000, 13, 0, 'ltv.jpg'),
 (8, 12, '2019-05-29', 'Vespa GTS 150 i-Get ABS', '<p><strong>Vespa</strong> GTS 150 i-Get ABS Piagio degan desain moderen</p>', 2550000, 9, 0, 'vs4.jpg'),
 (9, 16, '2019-05-29', 'Laptop Lenovo Legion R4000Ti', '<p>*Harap Cek Stock&nbsp; Terlebih Dahulu Sebelum Memesan, Karena Stock Dapat Berubah Sewaktu-Waktu (NO CANCEL / REFUND)*</p>\r\n\r\n<p>- 100% Barang Sesuai Dengan Foto (Foto Langsung Dari Barang Yang Tersedia)<br />\r\n&nbsp;</p>', 1500000, 7, 0, 'lp.jpg'),
-(10, 16, '2019-12-12', 'Asus A407MA-BV001T', '<div>\r\n<ul>\r\n	<li>Layar : 14 Inch</li>\r\n	<li>Prosesor : Intel N4000</li>\r\n	<li>Tipe Grafis : Intel HD Graphics</li>\r\n	<li>Memory : RAM 4 GB dan HDD 1TB</li>\r\n	<li>Sistem Operasi : Windows 10</li>\r\n	<li>Asus A407MA-BV001T Notebook - Grey [14 Inch/ N4000/ 4GB/ 1TB/ Win10] Grey</li>\r\n</ul>\r\n</div>', 3750000, 12, 0, 'assuslp.jpg'),
-(11, 13, '2019-12-12', 'Mitsubishi Xpander', '<table class=\"keyfeature-table\">\r\n	<tbody>\r\n		<tr>\r\n			<td><strong>Harga OTR(Jakarta Selatan)</strong></td>\r\n			<td>Rp&nbsp;212,3 Juta*</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Pilihan Angsuran</strong></td>\r\n			<td>Rp&nbsp;4,84 Juta <a class=\"button-link\" href=\"https://www.oto.com/mobil-baru/mitsubishi/xpander/harga\" title=\"Detail Harga Xpander\">Detail Harga Xpander</a></td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Mesin</strong></td>\r\n			<td>1499 cc</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tenaga</strong></td>\r\n			<td>103 hp</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tempat Duduk</strong></td>\r\n			<td>7 Kursi</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Jenis Transmisi</strong></td>\r\n			<td>Manual</td>\r\n		</tr>\r\n	</tbody>\r\n</table>', 267000000, 212000000, 0, 'oto.jpg');
+(10, 16, '2019-12-12', 'Asus A407MA-BV001T', '<div>\r\n<ul>\r\n	<li>Layar : 14 Inch</li>\r\n	<li>Prosesor : Intel N4000</li>\r\n	<li>Tipe Grafis : Intel HD Graphics</li>\r\n	<li>Memory : RAM 4 GB dan HDD 1TB</li>\r\n	<li>Sistem Operasi : Windows 10</li>\r\n	<li>Asus A407MA-BV001T Notebook - Grey [14 Inch/ N4000/ 4GB/ 1TB/ Win10] Grey</li>\r\n</ul>\r\n</div>', 3750000, 9, 0, 'assuslp.jpg'),
+(11, 13, '2019-12-12', 'Mitsubishi Xpander', '<table class="keyfeature-table">\r\n	<tbody>\r\n		<tr>\r\n			<td><strong>Harga OTR(Jakarta Selatan)</strong></td>\r\n			<td>Rp&nbsp;212,3 Juta*</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Pilihan Angsuran</strong></td>\r\n			<td>Rp&nbsp;4,84 Juta <a class="button-link" href="https://www.oto.com/mobil-baru/mitsubishi/xpander/harga" title="Detail Harga Xpander">Detail Harga Xpander</a></td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Mesin</strong></td>\r\n			<td>1499 cc</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tenaga</strong></td>\r\n			<td>103 hp</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Tempat Duduk</strong></td>\r\n			<td>7 Kursi</td>\r\n		</tr>\r\n		<tr>\r\n			<td><strong>Jenis Transmisi</strong></td>\r\n			<td>Manual</td>\r\n		</tr>\r\n	</tbody>\r\n</table>', 267000000, 212000000, 0, 'oto.jpg');
 
 -- --------------------------------------------------------
 
@@ -94,12 +110,19 @@ INSERT INTO `tbl_barang` (`id_barang`, `id_kategori`, `tanggal_masuk`, `nama_bar
 -- Table structure for table `tbl_biaya_kirim`
 --
 
-CREATE TABLE `tbl_biaya_kirim` (
+CREATE TABLE IF NOT EXISTS `tbl_biaya_kirim` (
   `id_biaya` int(11) NOT NULL,
   `provinsi` int(4) NOT NULL,
   `kabkota` int(2) NOT NULL,
   `biaya` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_biaya_kirim`
+--
+
+INSERT INTO `tbl_biaya_kirim` (`id_biaya`, `provinsi`, `kabkota`, `biaya`) VALUES
+(1, 6, 78, 45000);
 
 -- --------------------------------------------------------
 
@@ -107,19 +130,19 @@ CREATE TABLE `tbl_biaya_kirim` (
 -- Table structure for table `tbl_informasi`
 --
 
-CREATE TABLE `tbl_informasi` (
+CREATE TABLE IF NOT EXISTS `tbl_informasi` (
   `id_informasi` int(11) NOT NULL,
   `judul` varchar(50) NOT NULL,
   `keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_informasi`
 --
 
 INSERT INTO `tbl_informasi` (`id_informasi`, `judul`, `keterangan`) VALUES
-(1, 'Tentang Kami', '<h3 style=\"text-align:justify\"><span style=\"font-size:22px\">PT. INDONESIA POWER SEMARANG</span></h3>\r\n\r\n<p><span style=\"font-size:16px\">Alamat : Jl. Lame Blok M No.41 ,Semarang, Jawa Tengah,17435</span></p>\r\n\r\n<p><span style=\"font-size:16px\">Kontak : 081284802432</span></p>'),
-(2, 'Cara Pemesanan', '<p style=\"text-align:justify\">1. Klik pada tombol &#39;Beli&#39; pada barang yang ingin Anda beli/pesan.</p>\r\n\r\n<p style=\"text-align:justify\">2. Barang yang Anda beli/pesan akan masuk ke dalam Keranjang Belanja. Anda dapat menentukan berapa jumlah yang akan dibeli, kemudian klik tombol &#39;Simpan&#39;.</p>\r\n\r\n<p style=\"text-align:justify\">3. Jika sudah selesai, klik tombol &#39;Selesai Belanja&#39; maka akan tampil data pembeli beserta barang yang dibeli/dipesannya. kemudian klik tombol &#39;Proses Order&#39; maka akan tampil data cicilan pembayaran.</p>\r\n\r\n<p style=\"text-align:justify\">4. Apabila telah melakukan pembayaran, maka barang yang dibeli/dipesan akan segera dikirimkan.</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>\r\n\r\n<p style=\"text-align:justify\">&nbsp;</p>');
+(1, 'Tentang Kami', '<h3 style="text-align:justify"><span style="font-size:22px">PT. INDONESIA POWER SEMARANG</span></h3>\r\n\r\n<p><span style="font-size:16px">Alamat : Jl. Lame Blok M No.41 ,Semarang, Jawa Tengah,17435</span></p>\r\n\r\n<p><span style="font-size:16px">Kontak : 081284802432</span></p>'),
+(2, 'Cara Pemesanan', '<p style="text-align:justify">1. Klik pada tombol &#39;Beli&#39; pada barang yang ingin Anda beli/pesan.</p>\r\n\r\n<p style="text-align:justify">2. Barang yang Anda beli/pesan akan masuk ke dalam Keranjang Belanja. Anda dapat menentukan berapa jumlah yang akan dibeli, kemudian klik tombol &#39;Simpan&#39;.</p>\r\n\r\n<p style="text-align:justify">3. Jika sudah selesai, klik tombol &#39;Selesai Belanja&#39; maka akan tampil data pembeli beserta barang yang dibeli/dipesannya. kemudian klik tombol &#39;Proses Order&#39; maka akan tampil data cicilan pembayaran.</p>\r\n\r\n<p style="text-align:justify">4. Apabila telah melakukan pembayaran, maka barang yang dibeli/dipesan akan segera dikirimkan.</p>\r\n\r\n<p style="text-align:justify">&nbsp;</p>\r\n\r\n<p style="text-align:justify">&nbsp;</p>');
 
 -- --------------------------------------------------------
 
@@ -127,7 +150,7 @@ INSERT INTO `tbl_informasi` (`id_informasi`, `judul`, `keterangan`) VALUES
 -- Table structure for table `tbl_kabkota`
 --
 
-CREATE TABLE `tbl_kabkota` (
+CREATE TABLE IF NOT EXISTS `tbl_kabkota` (
   `id_kabkota` int(4) NOT NULL,
   `nama_kabkota` varchar(50) NOT NULL,
   `id_provinsi` int(2) NOT NULL
@@ -619,10 +642,10 @@ INSERT INTO `tbl_kabkota` (`id_kabkota`, `nama_kabkota`, `id_provinsi`) VALUES
 -- Table structure for table `tbl_kategori`
 --
 
-CREATE TABLE `tbl_kategori` (
+CREATE TABLE IF NOT EXISTS `tbl_kategori` (
   `id_kategori` int(11) NOT NULL,
   `nama_kategori` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_kategori`
@@ -641,16 +664,16 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- Table structure for table `tbl_komentar`
 --
 
-CREATE TABLE `tbl_komentar` (
+CREATE TABLE IF NOT EXISTS `tbl_komentar` (
   `id_komentar` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `id_konsumen` int(11) NOT NULL,
   `komentar` text NOT NULL,
   `status` enum('y','n') NOT NULL DEFAULT 'n',
-  `balas` int(11) NOT NULL DEFAULT 0,
+  `balas` int(11) NOT NULL DEFAULT '0',
   `rating` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_komentar`
@@ -667,9 +690,9 @@ INSERT INTO `tbl_komentar` (`id_komentar`, `id_barang`, `tanggal`, `id_konsumen`
 -- Table structure for table `tbl_konsumen`
 --
 
-CREATE TABLE `tbl_konsumen` (
+CREATE TABLE IF NOT EXISTS `tbl_konsumen` (
   `id_konsumen` int(11) NOT NULL,
-  `tanggal_daftar` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_daftar` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `nama_konsumen` varchar(30) NOT NULL,
   `alamat` varchar(100) NOT NULL,
   `kota` int(4) NOT NULL,
@@ -678,7 +701,7 @@ CREATE TABLE `tbl_konsumen` (
   `telepon` varchar(12) NOT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_konsumen`
@@ -686,7 +709,7 @@ CREATE TABLE `tbl_konsumen` (
 
 INSERT INTO `tbl_konsumen` (`id_konsumen`, `tanggal_daftar`, `nama_konsumen`, `alamat`, `kota`, `provinsi`, `kode_pos`, `telepon`, `email`, `password`) VALUES
 (47, '2018-05-05 08:46:52', 'Ferri', 'Jl. Berok Raya', 415, 18, '25146', '082170214455', 'vendry7@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b'),
-(52, '2019-12-05 08:06:59', 'rafi sahendra', 'padang panjang', 98, 3, '27683', '085363229539', 'rafisahendra07@gmail.com', 'fafae7c0cbe4b1aa33bb9abd857e80c4');
+(52, '2019-12-05 08:06:59', 'rafi sahendra', 'padang panjang', 78, 6, '27683', '085363229539', 'rafisahendra07@gmail.com', 'fafae7c0cbe4b1aa33bb9abd857e80c4');
 
 -- --------------------------------------------------------
 
@@ -694,7 +717,7 @@ INSERT INTO `tbl_konsumen` (`id_konsumen`, `tanggal_daftar`, `nama_konsumen`, `a
 -- Table structure for table `tbl_pembayaran`
 --
 
-CREATE TABLE `tbl_pembayaran` (
+CREATE TABLE IF NOT EXISTS `tbl_pembayaran` (
   `id_bayar` int(11) NOT NULL,
   `tanggal_bayar` date NOT NULL,
   `id_transaksi` int(11) NOT NULL,
@@ -705,19 +728,7 @@ CREATE TABLE `tbl_pembayaran` (
   `jumlah_bayar` int(11) NOT NULL,
   `bukti_bayar` varchar(200) NOT NULL,
   `status_bayar` varchar(30) NOT NULL DEFAULT 'Menunggu Pembayaran'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_pembayaran`
---
-
-INSERT INTO `tbl_pembayaran` (`id_bayar`, `tanggal_bayar`, `id_transaksi`, `rekening_asal`, `no_rekening_asal`, `pemilik_rekening`, `rekening_tujuan`, `jumlah_bayar`, `bukti_bayar`, `status_bayar`) VALUES
-(3, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
-(4, '0000-00-00', 2, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
-(5, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
-(6, '0000-00-00', 1, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
-(7, '0000-00-00', 2, '', '', '', '', 0, '', 'Menunggu Pembayaran'),
-(8, '0000-00-00', 3, '', '', '', '', 0, '', 'Menunggu Pembayaran');
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -725,14 +736,26 @@ INSERT INTO `tbl_pembayaran` (`id_bayar`, `tanggal_bayar`, `id_transaksi`, `reke
 -- Table structure for table `tbl_pembayaran_angsuran`
 --
 
-CREATE TABLE `tbl_pembayaran_angsuran` (
+CREATE TABLE IF NOT EXISTS `tbl_pembayaran_angsuran` (
   `id_pembayaran` int(11) NOT NULL,
   `id_angsuran` int(11) NOT NULL,
   `tgl_bayar` date NOT NULL,
   `jumlah_bayar` int(11) NOT NULL,
   `status_pembayaran` enum('Belum Dikonfirmasi','Dikonfirmasi','Ditolak','','') NOT NULL DEFAULT 'Belum Dikonfirmasi',
   `bukti_pembayaran` varchar(191) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_pembayaran_angsuran`
+--
+
+INSERT INTO `tbl_pembayaran_angsuran` (`id_pembayaran`, `id_angsuran`, `tgl_bayar`, `jumlah_bayar`, `status_pembayaran`, `bukti_pembayaran`) VALUES
+(3, 84, '2019-12-13', 316250, 'Dikonfirmasi', '131219041011274900.jpg'),
+(4, 85, '2019-12-13', 316250, 'Dikonfirmasi', '131219050802924200.jpg'),
+(5, 86, '2019-12-13', 316250, 'Dikonfirmasi', '131219051048677100.jpg'),
+(6, 87, '2019-12-13', 316250, 'Dikonfirmasi', '131219065846809400.png'),
+(7, 88, '2019-12-13', 316250, 'Dikonfirmasi', '131219070058367400.jpg'),
+(8, 89, '2019-12-13', 316250, 'Belum Dikonfirmasi', '131219070219374500.jpg');
 
 -- --------------------------------------------------------
 
@@ -740,10 +763,10 @@ CREATE TABLE `tbl_pembayaran_angsuran` (
 -- Table structure for table `tbl_provinsi`
 --
 
-CREATE TABLE `tbl_provinsi` (
+CREATE TABLE IF NOT EXISTS `tbl_provinsi` (
   `id_provinsi` int(2) NOT NULL,
   `nama_provinsi` varchar(40) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_provinsi`
@@ -791,9 +814,9 @@ INSERT INTO `tbl_provinsi` (`id_provinsi`, `nama_provinsi`) VALUES
 -- Table structure for table `tbl_transaksi`
 --
 
-CREATE TABLE `tbl_transaksi` (
+CREATE TABLE IF NOT EXISTS `tbl_transaksi` (
   `id_transaksi` int(11) NOT NULL,
-  `tanggal_transaksi` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_transaksi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_konsumen` int(11) NOT NULL,
   `total_bayar` int(11) NOT NULL,
   `status` enum('Belum Disetujui','Disetujui','Ditolak','') NOT NULL DEFAULT 'Belum Disetujui',
@@ -801,19 +824,33 @@ CREATE TABLE `tbl_transaksi` (
   `besar_angsuran` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tbl_transaksi`
+--
+
+INSERT INTO `tbl_transaksi` (`id_transaksi`, `tanggal_transaksi`, `id_konsumen`, `total_bayar`, `status`, `lama_angsuran`, `besar_angsuran`) VALUES
+(1, '2019-12-13 04:05:57', 52, 3795000, 'Disetujui', 12, 316250);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_transaksi_detail`
 --
 
-CREATE TABLE `tbl_transaksi_detail` (
+CREATE TABLE IF NOT EXISTS `tbl_transaksi_detail` (
   `id_detail` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_transaksi_detail`
+--
+
+INSERT INTO `tbl_transaksi_detail` (`id_detail`, `id_transaksi`, `id_barang`, `jumlah_beli`, `jumlah_bayar`) VALUES
+(15, 1, 10, 1, 3750000);
 
 -- --------------------------------------------------------
 
@@ -821,19 +858,12 @@ CREATE TABLE `tbl_transaksi_detail` (
 -- Table structure for table `tbl_transaksi_tmp`
 --
 
-CREATE TABLE `tbl_transaksi_tmp` (
+CREATE TABLE IF NOT EXISTS `tbl_transaksi_tmp` (
   `id_konsumen` int(11) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL,
   `jumlah_bayar` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbl_transaksi_tmp`
---
-
-INSERT INTO `tbl_transaksi_tmp` (`id_konsumen`, `id_barang`, `jumlah_beli`, `jumlah_bayar`) VALUES
-(52, 9, 1, 1500000);
 
 --
 -- Indexes for dumped tables
@@ -944,75 +974,62 @@ ALTER TABLE `tbl_transaksi_detail`
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_angsuran`
 --
 ALTER TABLE `tbl_angsuran`
-  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=96;
 --
 -- AUTO_INCREMENT for table `tbl_barang`
 --
 ALTER TABLE `tbl_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `tbl_biaya_kirim`
 --
 ALTER TABLE `tbl_biaya_kirim`
-  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_biaya` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_informasi`
 --
 ALTER TABLE `tbl_informasi`
-  MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_informasi` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tbl_komentar`
 --
 ALTER TABLE `tbl_komentar`
-  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tbl_konsumen`
 --
 ALTER TABLE `tbl_konsumen`
-  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
+  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran`
 --
 ALTER TABLE `tbl_pembayaran`
-  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  MODIFY `id_bayar` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_pembayaran_angsuran`
 --
 ALTER TABLE `tbl_pembayaran_angsuran`
-  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_provinsi`
 --
 ALTER TABLE `tbl_provinsi`
-  MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
+  MODIFY `id_provinsi` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `tbl_transaksi_detail`
 --
 ALTER TABLE `tbl_transaksi_detail`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-COMMIT;
-
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
