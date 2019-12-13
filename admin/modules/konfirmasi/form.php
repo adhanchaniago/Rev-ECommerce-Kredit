@@ -148,7 +148,7 @@ elseif ($_GET['alert'] == 2) { ?>
 					<div class="col-md-offset-0 col-md-12">
 
 
-						<?php if($status_bayar !== 'Belum Dikonfirmasi'){ ?>
+						<?php if($status_bayar != 'Belum Dikonfirmasi'){ ?>
 						
 						<a style="width:100px" href="?module=konfirmasi" class="btn">Kembali</a>
 						<?php }else{ ?>
