@@ -1,38 +1,37 @@
-<?php  
+<?php
 // fungsi untuk pengecekan status login user 
 // jika user belum login, alihkan ke halaman login dan tampilkan pesan = 1
-if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])){
+if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])) {
     echo "<script type='text/javascript'>alert('Anda harus login terlebih dahulu!');</script>
           <meta http-equiv='refresh' content='0; url=?page=home'>";
 }
 // jika user sudah login, maka jalankan perintah untuk ubah password
 else { ?>
- 
-    <script type="text/javascript">
-    function cek_stok(input) {
-        stk = document.frmBeli.stok.value;
-        jml = document.frmBeli.jumlah_beli.value;
-        var num = input.value;
-        var stok = eval(stk);
-        var jumlah = eval(jml);
-        if(stok < jumlah){
-            alert('Jumlah Stok Tidak Memenuhi, Kurangi Jumlah Beli');
-            input.value = input.value.substring(0,input.value.length-1);
-        }
-    }
 
-    function hitung_jumlah_bayar() {
-        bil1 = document.frmBeli.harga.value;
-        bil2 = document.frmBeli.jumlah_beli.value;
-        if (bil2=='') {
-            var hasil = 0;
-        } 
-        else {
-            var hasil = eval(bil1) * eval(bil2);
-        };
-        document.frmBeli.jumlah_bayar1.value="Rp. " + (hasil);
-        document.frmBeli.jumlah_bayar.value=(hasil);
-    }
+    <script type="text/javascript">
+        function cek_stok(input) {
+            stk = document.frmBeli.stok.value;
+            jml = document.frmBeli.jumlah_beli.value;
+            var num = input.value;
+            var stok = eval(stk);
+            var jumlah = eval(jml);
+            if (stok < jumlah) {
+                alert('Jumlah Stok Tidak Memenuhi, Kurangi Jumlah Beli');
+                input.value = input.value.substring(0, input.value.length - 1);
+            }
+        }
+
+        function hitung_jumlah_bayar() {
+            bil1 = document.frmBeli.harga.value;
+            bil2 = document.frmBeli.jumlah_beli.value;
+            if (bil2 == '') {
+                var hasil = 0;
+            } else {
+                var hasil = eval(bil1) * eval(bil2);
+            };
+            document.frmBeli.jumlah_bayar1.value = "Rp. " + (hasil);
+            document.frmBeli.jumlah_bayar.value = (hasil);
+        }
     </script>
 
     <!-- Page Heading/Breadcrumbs -->
@@ -54,13 +53,13 @@ else { ?>
 
             <div class="row">
                 <div class="col-lg-12">
-                    
-                    <?php  
+
+                    <?php
                     $query = mysqli_query($mysqli, "SELECT * FROM tbl_barang WHERE id_barang='$_GET[produk]'")
-                                                or die('Ada kesalahan pada query tampil data barang : '.mysqli_error($mysqli));
+                        or die('Ada kesalahan pada query tampil data barang : ' . mysqli_error($mysqli));
 
                     $data = mysqli_fetch_assoc($query);
-                        $deskripsi = $data['deskripsi'];
+                    $deskripsi = $data['deskripsi'];
                     ?>
                     <div class="col-md-4">
                         <img style="border:1px solid #eee;border-radius:2px" class="img-responsive img-hover" src="images/barang/<?php echo $data['gambar']; ?>" width="400" alt="">
@@ -70,7 +69,7 @@ else { ?>
 
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                  <!-- tampilan form hubungi kami -->
+                                <!-- tampilan form hubungi kami -->
                                 <form class="form-horizontal" method="POST" action="pages/transaksi/proses_beli.php" name="frmBeli">
 
                                     <input type="hidden" name="id_barang" value="<?php echo $data['id_barang']; ?>">
@@ -118,11 +117,11 @@ else { ?>
                                         </div>
                                     </div>
 
-                                    <hr/>
+                                    <hr />
                                     <div class="form-group">
                                         <div class="col-sm-offset-3 col-sm-9">
                                             <input style="width:100px" type="submit" class="btn btn-primary btn-submit" name="simpan" value="Simpan">
-                                            &nbsp; &nbsp; 
+                                            &nbsp; &nbsp;
                                             <a style="width:100px" href="?page=home" class="btn btn-default">Batal</a>
                                         </div>
                                     </div>
