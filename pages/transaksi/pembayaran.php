@@ -48,6 +48,8 @@ else { ?>
                         $total_bayar = $data['total_bayar'];    
                         $lama_angsuran = $data['lama_angsuran'];
                         $besar_angsuran = $data['besar_angsuran'];
+                        $dp = $data['dp'];
+
                         $data_pembayaran = array(); // variabel untuk menampung tanggal sebanyak lama angsuran
 
                         // tanggal batas waktu per bulan
@@ -67,6 +69,7 @@ else { ?>
 
                         ?>
                             <h4>Total yang harus dibayar : Rp. <?php echo format_rupiah_nol($total_bayar); ?></h4>
+                            <h4>Dp yang harus dibayar : Rp. <?php echo format_rupiah_nol($dp); ?></h4>
                             <h4>Besar angsuran yang harus dibayarkan: Rp. <?php echo format_rupiah_nol($besar_angsuran); ?></h4>
                             <h4>Lama angsuran Anda: <?php echo format_rupiah_nol($lama_angsuran); ?> Bulan</h4>
                             <h4>Simulasi Pembayaran Angsuran : </h4>

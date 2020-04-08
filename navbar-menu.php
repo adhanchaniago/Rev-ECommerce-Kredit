@@ -45,6 +45,20 @@
     </li>
     <?php
   }
+  // jika menu cara beli dipilih, menu cara beli aktif
+  if ($_GET["page"] == "request") { ?>
+    <li class="active">
+      <a href="?page=request"> Request Produk </a>
+    </li>
+  <?php
+  }
+  // jika tidak, menu cara beli tidak aktif
+  else { ?>
+    <li>
+      <a href="?page=request"> Request Produk </a>
+    </li>
+    <?php
+  }
 
   if (empty($_SESSION['user_email']) && empty($_SESSION['user_password'])) {
     // jika menu daftar dipilih, menu daftar aktif

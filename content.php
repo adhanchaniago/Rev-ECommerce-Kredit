@@ -107,4 +107,8 @@ if ($_GET['page'] == 'penerimaan') {
 if ($_GET['page'] == 'login') {
 	include "pages/login/view.php";
 }
+// jika halaman konten yang dipilih login, panggil file view login
+if ($_GET['page'] == 'request') {
+	include "pages/request/view.php";
+}
 ?>
